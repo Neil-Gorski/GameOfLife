@@ -1,41 +1,35 @@
-const obj = {
-    name: 'Andy',
-    move: function () {
-        return 'up';
-    }
+//strings
+"" <-
+''
+``
+
+const num = 10;
+
+"Primitive type " + num + " code:";
+`Primitive type ${num} code:`;
+
+// -------------------
+//numbers
+10
+10.2
+-2
+
+// -------------------
+// boolean
+true/false
+
+// -------------------
+null
+undefined
+
+let firstPerson = null;
+firstPerson = {};
+
+// -------------------
+// array
+[1, 'name', {name: 'adad'}, [1,2,3], () => {}];
+
+// object
+{
+    name: 'adad'
 }
-
-obj.move()
-obj.name
-
-
-function Car(id, name, type, color) {
-    this.id = id;
-    this.name = name;
-    this.type = type;
-}
-
-Car.prototype.getName = function () {return this.name};
-
-var myFirstCar = new Car('1', 'opel', 'sedan', 'black');
-
-myFirstCar.getName();
-
-
-class Car {
-    constructor(id, name, type, color) {
-        this.id = id;
-        this.name = name;
-        this.type = type;
-    }
-
-    getName() {
-        return this.name;
-    }
-}
-
-const mySecondCar = new Car('1', 'opel', 'sedan', 'black');
-
-mySecondCar.name = 'bmw';
-
-mySecondCar.getName = 'cool';
