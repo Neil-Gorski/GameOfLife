@@ -1,63 +1,33 @@
-// Losowanie 2h liczb od 0 do 10
-// Zapisujemy poprawna odpowiedz i pytamy o wynik
-// Czy podany wynik jest poprawny
+const emptyArr = [];
+const arrNotEmpty = [undefined, 'jan', 'andrzej', [43, 'krakow']];
+console.log(arrNotEmpty[3][1]);
 
-// 10 pytan
-// Ilosc poprawnych odpowiedzi
+const arrWithFiv = new Array(10).fill('1');
 
-//Ile  ma być pytań
-//Pytamy tyle razy aż  użytkownik poda odpowiednią wartość
 
-function between (min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
+for (let i = 0; i < arrNotEmpty.length; i++ ) {
+    arrNotEmpty[i];
 }
 
+//-------------------
+// push(), pop()
+// console.log(arrNotEmpty);
+arrNotEmpty.push('kamil');
+// console.log(arrNotEmpty);
+const lastElem = arrNotEmpty.pop();
+// console.log(arrNotEmpty);
 
-function getNumberOfQuestions() {
-    
-    const answer = prompt('How many questions do you want?');
-    if(answer === null){
-        return null
-    }
-    return parseInt(answer);
+//-------------------
+// unshift(), shift()
+arrNotEmpty.unshift('daniel');
+// console.log(arrNotEmpty);
+const firstElem = arrNotEmpty.shift();
 
-}
+//-------------------
+console.log(arrNotEmpty);
+console.log(arrNotEmpty.splice(1, 1));
+console.log(arrNotEmpty);
 
-function isNumberOfQuestionIncorrect(count){
-
-    return isNaN(count) || count == 1;
-}
-
-let numberOfQuestions;
-let correctAnswersNumb = 0;
-
-
-do {
-    numberOfQuestions = getNumberOfQuestions();
-    if (numberOfQuestions === null) break;
-}while (isNumberOfQuestionIncorrect(numberOfQuestions));
-
-
-
-if(numberOfQuestions !== null){
-    for (let i = 0; i < numberOfQuestions; i++) {
-        const firstRandomNumb = between(0, 10);
-        const secondRandomNumb = between(0, 10);
-        const correctResult = firstRandomNumb * secondRandomNumb;
-        const userNumb = parseInt(prompt(`How much is ${firstRandomNumb} * ${secondRandomNumb}`));
-        if (userNumb === correctResult) {
-         correctAnswersNumb++;
-     }
-    }
-    console.log(`You have ${correctAnswersNumb} correct answers`);
-    console.log(`You had ${correctAnswersNumb} of ${numberOfQuestions}`);
-    const rightAnswerRatio = correctAnswersNumb / numberOfQuestions;
-    if(rightAnswerRatio >= 0.5){
-        console.log("You have pass!");
-    }else{
-        console.log("You have faild!");
-    }
-    console.log(`You have ${Math.round(rightAnswerRatio * 100)}% right!`);
-}
-
-
+//-------------------
+arrNotEmpty.indexOf('andrzej')
+// arrNotEmpty.indexOf('warszawa') -> return -1
