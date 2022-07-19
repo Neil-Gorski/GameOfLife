@@ -31,3 +31,14 @@ console.log(arrNotEmpty);
 //-------------------
 arrNotEmpty.indexOf('andrzej')
 // arrNotEmpty.indexOf('warszawa') -> return -1
+
+
+
+//------------------- Exe LOTTO ----
+//stworzyć 49 piłeczek
+
+//losować 6 z 49
+//stworzyć kupon z 6 cyframi
+//porównać 6 wylosowanych z naszym kuponem
+//ilość losowań lotto żeby trafić nasz kupon
+
