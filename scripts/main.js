@@ -52,20 +52,20 @@ function howManyTrysForLottoNeeded(){
     let highestHit = 0;
     let trys = 0;
     let currentHit;
-    console.log(`Let's play Lotto!`)
+    console.log(`Let's play Lotto!`);
 
     while(highestHit < 6){
         trys ++;
         currentHit = compareNumbers(myLottoNumbers, getLottoNumbers());
         if (highestHit < currentHit){
             highestHit = currentHit;
-            console.log(`You got a new heighest correct Lotto hit with ${highestHit} correct numbers on ${Intl.NumberFormat('en-US').format(trys)}th try.`);
+            console.log(`You got a new heighest correct Lotto hit with ${highestHit} crrect numbers on ${Intl.NumberFormat('en-US').format(trys)}th try.`);
         }
         if(trys % 1000000 === 0){
-            console.log(`You had now ${trys / 1000000} million trys.`)
+            console.log(`You had now ${trys / 1000000} million trys.`);
         }
     }
-    console.log(`You got Lotto on ${Intl.NumberFormat('en-US').format(trys)}th try.`)
+    console.log(`You got Lotto on ${Intl.NumberFormat('en-US').format(trys)}th try.`);
 }
 
 
