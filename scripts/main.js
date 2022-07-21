@@ -54,7 +54,7 @@ function howManyTrysForLottoNeeded(){
     let currentHit;
     console.log(`Let's play Lotto!`)
 
-    while(highestHit <6){
+    while(highestHit < 6){
         trys ++;
         currentHit = compareNumbers(myLottoNumbers, getLottoNumbers());
         if (highestHit < currentHit){
