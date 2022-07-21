@@ -46,8 +46,8 @@
 // randomFn(b);
 
 // b.splice(1, 1);
-console.log('a: ', a)
-console.log("b: ", b)
+// console.log('a: ', a)
+// console.log("b: ", b)
 
 //----------------------------------------
 //[].sort()
@@ -59,8 +59,17 @@ const testArray = ['Szymon', 'Adrian', 'Kasia', 1, 10, undefined, null, NaN, ['k
 
 //Nowa tablica z imiona dłuższymi niż 5 znaków
 //Nowa tablica z numberami do kwadratu
-//nowa tablica tylko number
+//nowa tablica tylko number - NumberArray
 //nowa tablica bez wartości negatywnych
 //nowa tablica ze wszystkimi elementami typu string + jesli element zaczyna się z małej litery to zmieniamy ją na wielką
 
 
+function filterNumbers(element) {
+    if(typeof element === 'number' && isNaN(element) !== true){
+        return true;
+    }
+}
+
+const numberArray = testArray.filter(filterNumbers)
+
+console.log(numberArray)
