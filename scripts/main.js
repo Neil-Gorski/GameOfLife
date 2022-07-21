@@ -1,71 +1,66 @@
-//stworzyć 49 piłeczek
-//losować 6 z 49
-//stworzyć kupon z 6 cyframi
-//porównać 6 wylosowanych z naszym kuponem
-//ilość losowań lotto żeby trafić nasz kupon
+// const testArray = ['Szymon', 'Adrian', 'Kasia', 1, 10, undefined, null, NaN, ['kraków', 'Warszawa']];
+//
+// testArray.sort(function (a, b) {
+//     // console.log("a: ", a);
+//     // console.log("b: ", b)
+//     if (a < b) {
+//         return 1;
+//     } else if (a > b) {
+//         return -1;
+//     } else {
+//         return 0;
+//     }
+// });
 
-function between (min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-}
+// console.log('testArray', testArray);
 
-function sortNum (a, b) {
-    return a - b;
-}
+// const newArr = [2, 3, 5].map(function (element) {
+//     console.log('element', element)
+//     return element * 2;
+// });
 
-function fillArrayByNumbers(count) {
-    const tempArr = [];
-    for (let i = 1; i <= count; i++ ) {
-        tempArr.push(i);
-    }
+// console.log('newArr', newArr);
 
-    return tempArr;
-}
+// for (i <= 3) {
+//     function (element) {
+//         return element * 2;
+//     }
+// }
 
-function drawNumbers(lottoArray){
-    const numbersDrawn = [];
-    for (let i = 1; i <= 6; i++ ) {
-        //wylosować cyfrę z zakresu 0-lottoArray.lenght,
-        const randomIndex = between(0, lottoArray.length - 1);
-        //wyciągamy wylosowany indeks z lottoArray za pomocą splice
-        const randomBall = lottoArray.splice(randomIndex,1)[0];
-        numbersDrawn.push(randomBall);
-    }
-    return numbersDrawn;
-}
+// const test = [];
+//
+// testArray.forEach(function (element) {
+//     if (element === 'jan') {
+//         test.push(true);
+//     }
+// });
+//
+// const a = [1, 2, 3];
+// const b = a;
+//
+// function randomFn(arr){
+//     const arr2 = [...arr];
+//     arr.push('new element');
+// }
+//
+// randomFn(b);
 
-function compareArrays(arr1, arr2) {
-    if (arr1.length !== arr2.length) {
-        return false;
-    }
+// b.splice(1, 1);
+console.log('a: ', a)
+console.log("b: ", b)
 
-    arr1.sort(sortNum);
-    arr2.sort(sortNum);
+//----------------------------------------
+//[].sort()
+//[].map()
+// [].forEach()
+// [].filter()
 
-    let isEq = true;
+const testArray = ['Szymon', 'Adrian', 'Kasia', 1, 10, undefined, null, NaN, ['kraków', 'Warszawa'], 'ala', 'basia', 20, 25, 13, 'ola', 'alan', "50", "1", "13"];
 
-    for(let i = 0; i < arr1.length; i++){
-        if (arr1[i] !== arr2[i]) {
-            isEq = false;
-        }
-    }
-    return isEq;
-}
+//Nowa tablica z imiona dłuższymi niż 5 znaków
+//Nowa tablica z numberami do kwadratu
+//nowa tablica tylko number
+//nowa tablica bez wartości negatywnych
+//nowa tablica ze wszystkimi elementami typu string + jesli element zaczyna się z małej litery to zmieniamy ją na wielką
 
-
-function main() {
-    let jackpot = false;
-    let ticketsCount = 0;
-    const myTicket = [3,5,4,7,1,9];
-
-    while (jackpot === false) {
-        const lottoArray = fillArrayByNumbers(49);
-        const numbersDrawn = drawNumbers(lottoArray);
-        jackpot = compareArrays(myTicket, numbersDrawn);
-        ticketsCount++;
-    }
-
-    return ticketsCount;
-}
-
-console.log(main());
 
