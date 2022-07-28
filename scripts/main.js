@@ -93,7 +93,7 @@ const longNames = testArray.flat().filter(fitlerLongNames)
 
 //nowa tablica ze wszystkimi elementami typu string + jesli element zaczyna się z małej litery to zmieniamy ją na wielką
 function isString(element){
-    if(typeof element === 'string'&& !isNaN(element)){
+    if(typeof element === 'string' && isNaN(element)){
         return true;
     }
 }
@@ -104,3 +104,12 @@ function upperStrings(element){
 }
 const upperStringsArr = testArray.flat().filter(isString).map(upperStrings)
 console.log(upperStringsArr);
+
+
+function filterNonNegativeValue(element){
+    if (element === undefined || element === null || Number.isNaN(element) === true){
+        return false;
+    }else{
+        return true;
+    }
+}
