@@ -113,3 +113,5 @@ function filterNonNegativeValue(element){
         return true;
     }
 }
+const nonNegativeArr = testArray.filter(isString)
+console.log(nonNegativeArr)
