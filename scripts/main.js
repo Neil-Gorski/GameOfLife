@@ -69,15 +69,14 @@ console.log(numberArray);
 
 // //Nowa tablica z numberami do kwadratu
 
-function squeredNumbers(element) {
-    return element**2;
-};
+const squeredNumbers = element => element**2;
+
+
 let squeredNumbersArr1 = numberArray.map(squeredNumbers);
 console.log(squeredNumbersArr1);
 
-let squeredNumbersArr2 = numberArray.map(function(element) {
-    return element**2
-});
+let squeredNumbersArr2 = numberArray.map((element) => element**2);
+
 console.log(squeredNumbersArr2);
 
 // //nowa tablica ze wszystkimi elementami typu string + jesli element zaczyna się z małej litery to zmieniamy ją na wielką
@@ -90,7 +89,7 @@ console.log(stringArray);
 
 // //tu nie wiem jak to wrzucić do jednej funkcji
 
-stringArray.map(function(el, index, arr){
+stringArray.map((el, index, arr)=> {
     for (let i = index; i < arr.length; i++){
         arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].substring(1);
     }
@@ -100,11 +99,9 @@ stringArray.map(function(el, index, arr){
 
 
 // //Nowa tablica z imiona dłuższymi niż 5 znaków
-function filterNameLongerThanFiveChar (element) {
-    if (typeof element ==="string" && isNaN(element)=== true && element.length > 5){
-        return true;
-    }
-}
+const filterNameLongerThanFiveChar = (element) => typeof element ==="string" && isNaN(element)=== true && element.length > 5;
+
+
 
 let nameLongerThanFiveChar = testArray.filter(filterNameLongerThanFiveChar);
 console.log(nameLongerThanFiveChar);
@@ -112,13 +109,9 @@ console.log(nameLongerThanFiveChar);
 
 // nowa tablica bez wartości negatywnych
 
-const filterNonNegativeValue = (element) => {
-    if (element === undefined || element === null || Number.isNaN(element)===true)  {
-        return false;
-    } else {
-        return true;
-    }
-}
+const filterNonNegativeValue = (element) =>  element === undefined || element === null || Number.isNaN(element)===true ? false : true;
+
+
 
 let nonNegativeValueArr = testArray.filter(filterNonNegativeValue);
 console.log("nonNegativeValueArr", nonNegativeValueArr);
