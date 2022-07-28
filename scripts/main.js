@@ -56,78 +56,63 @@
 // // [].forEach()
 // // [].filter()
 
-// const testArray = ['Szymon', 'Adrian', 'Kasia', 1, 10, undefined, null, NaN, ['kraków', 'Warszawa'], 'ala', 'basia', 20, 25, 13, 'ola', 'alan', "50", "1", "13"];
+const testArray = ['Szymon', 'Adrian', 'Kasia', 1, 10, undefined, null, NaN, ['kraków', 'Warszawa'], 'ala', 'basia', 20, 25, 13, 'ola', 'alan', "50", "1", "13"];
 
 
 
 // //nowa tablica tylko number
-// function filterNumbers(element) {
-//     if(typeof element === 'number' && isNaN(element) !== true){
-//         return true;
-//     }
-// }
+const filterNumbers = (element) => typeof element === 'number' && isNaN(element) !== true ? true : false;
 
-// let numberArray = testArray.filter(filterNumbers);
-// console.log(numberArray);
+let numberArray = testArray.filter(filterNumbers);
+console.log(numberArray);
 
 
 // //Nowa tablica z numberami do kwadratu
 
-// function squeredNumbers(element) {
-//     return element**2;
-// };
-// let squeredNumbersArr1 = numberArray.map(squeredNumbers);
-// console.log(squeredNumbersArr1);
+function squeredNumbers(element) {
+    return element**2;
+};
+let squeredNumbersArr1 = numberArray.map(squeredNumbers);
+console.log(squeredNumbersArr1);
 
-// // let squeredNumbersArr2 = numberArray.map(function(element) {
-// //     return element**2
-// // });
-// // console.log(squeredNumbersArr2);
+let squeredNumbersArr2 = numberArray.map(function(element) {
+    return element**2
+});
+console.log(squeredNumbersArr2);
 
 // //nowa tablica ze wszystkimi elementami typu string + jesli element zaczyna się z małej litery to zmieniamy ją na wielką
 
-// function filterStrings (element) {
-//     if (typeof element ==="string"){
-//         return true;
-//     }
-// }
+const filterStrings = (element) => typeof element === "string";
 
-// let stringArray = testArray.filter(filterStrings);
-// console.log(stringArray);
+
+let stringArray = testArray.filter(filterStrings);
+console.log(stringArray);
 
 // //tu nie wiem jak to wrzucić do jednej funkcji
 
-// stringArray.map(function(el, index, arr){
-//     for (let i = index; i < arr.length; i++){
-//         arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].substring(1);
-//     }
-// });
+stringArray.map(function(el, index, arr){
+    for (let i = index; i < arr.length; i++){
+        arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].substring(1);
+    }
+});
 
 // console.log(stringArray);
 
 
 // //Nowa tablica z imiona dłuższymi niż 5 znaków
-// function filterNameLongerThanFiveChar (element) {
-//     if (typeof element ==="string" && isNaN(element)=== true && element.length > 5){
-//         return true;
-//     }
-// }
+function filterNameLongerThanFiveChar (element) {
+    if (typeof element ==="string" && isNaN(element)=== true && element.length > 5){
+        return true;
+    }
+}
 
-// let nameLongerThanFiveChar = testArray.filter(filterNameLongerThanFiveChar);
-// console.log(nameLongerThanFiveChar);
+let nameLongerThanFiveChar = testArray.filter(filterNameLongerThanFiveChar);
+console.log(nameLongerThanFiveChar);
 
 
-// //nowa tablica bez wartości negatywnych
-// // function filterNonNegativeValue (element) {
-// //     if (typeof element !== "undefined" && element !== null)
-// //         return true;
-// //     }
-// // let nonNegativeValueArr = testArray.filter(filterNonNegativeValue);
-// // console.log("nonNegativeValueArr", nonNegativeValueArr);
+// nowa tablica bez wartości negatywnych
 
-const testArray = ['Szymon', 'Adrian', 'Kasia', 1, 10, undefined, null, NaN, ['kraków', 'Warszawa'], 'ala', 'basia', 20, 25, 13, 'ola', 'alan', "50", "1", "13"];
-
-function filterNonNegativeValue (element) {
+const filterNonNegativeValue = (element) => {
     if (element === undefined || element === null || Number.isNaN(element)===true)  {
         return false;
     } else {
