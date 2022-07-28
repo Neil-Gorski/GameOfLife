@@ -1,117 +1,60 @@
-// // const testArray = ['Szymon', 'Adrian', 'Kasia', 1, 10, undefined, null, NaN, ['kraków', 'Warszawa']];
-// //
-// // testArray.sort(function (a, b) {
-// //     // console.log("a: ", a);
-// //     // console.log("b: ", b)
-// //     if (a < b) {
-// //         return 1;
-// //     } else if (a > b) {
-// //         return -1;
-// //     } else {
-// //         return 0;
-// //     }
-// // });
+class Car {
+    constructor(name, maximumSpeed = 230) {
+        if (typeof name === 'string') {
+            this.name = name
+        }
+        this.color = null;
 
-// // console.log('testArray', testArray);
-
-// // const newArr = [2, 3, 5].map(function (element) {
-// //     console.log('element', element)
-// //     return element * 2;
-// // });
-
-// // console.log('newArr', newArr);
-
-// // for (i <= 3) {
-// //     function (element) {
-// //         return element * 2;
-// //     }
-// // }
-
-// // const test = [];
-// //
-// // testArray.forEach(function (element) {
-// //     if (element === 'jan') {
-// //         test.push(true);
-// //     }
-// // });
-// //
-// // const a = [1, 2, 3];
-// // const b = a;
-// //
-// // function randomFn(arr){
-// //     const arr2 = [...arr];
-// //     arr.push('new element');
-// // }
-// //
-// // randomFn(b);
-
-// // b.splice(1, 1);
-
-// // console.log('a: ', a)
-// // console.log("b: ", b)
-
-// //----------------------------------------
-// //[].sort()
-// //[].map()
-// // [].forEach()
-// // [].filter()
-
-const testArray = ['Szymon', 'Adrian', 'Kasia', 1, 10, undefined, null, NaN, ['kraków', 'Warszawa'], 'ala', 'basia', 20, 25, 13, 'ola', 'alan', "50", "1", "13"];
-
-
-
-// //nowa tablica tylko number
-const filterNumbers = (element) => typeof element === 'number' && isNaN(element) !== true ? true : false;
-
-let numberArray = testArray.filter(filterNumbers);
-console.log(numberArray);
-
-
-// //Nowa tablica z numberami do kwadratu
-
-const squeredNumbers = element => element**2;
-
-
-let squeredNumbersArr1 = numberArray.map(squeredNumbers);
-console.log(squeredNumbersArr1);
-
-let squeredNumbersArr2 = numberArray.map((element) => element**2);
-
-console.log(squeredNumbersArr2);
-
-// //nowa tablica ze wszystkimi elementami typu string + jesli element zaczyna się z małej litery to zmieniamy ją na wielką
-
-const filterStrings = (element) => typeof element === "string";
-
-
-let stringArray = testArray.filter(filterStrings);
-console.log(stringArray);
-
-// //tu nie wiem jak to wrzucić do jednej funkcji
-
-stringArray.map((el, index, arr)=> {
-    for (let i = index; i < arr.length; i++){
-        arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].substring(1);
+        if (typeof maximumSpeed === 'number') {
+            this.maximumSpeed = maximumSpeed;
+        }
+        this.speed = 0;
+        this.numberOfWheels = 4;
+        this.numberOfGears = 8;
     }
-});
 
-// console.log(stringArray);
+    setColor(color) {
+        if (typeof color === 'string') {
+            this.color = color;
+        } else {
+            throw new Error("Color value should be string");
+        }
+    }
+
+    getColor() {
+        // console.log('THIS --> ', this);
+        return this.color;
+    }
+
+    setSpeed(speed) {
+
+    }
+
+    accelerate(howMuch) {
+
+    }
+
+    decelerate(howMuch) {
+
+    }
+
+}
+
+const firstCar = new Car( "BMW", 180);
+firstCar.setColor("black");
+firstCar.getColor();
 
 
-// //Nowa tablica z imiona dłuższymi niż 5 znaków
-const filterNameLongerThanFiveChar = (element) => typeof element ==="string" && isNaN(element)=== true && element.length > 5;
+const secCar = new Car("Opel");
+secCar.setColor("red");
+secCar.getColor();
 
 
+const cars = [
+    new Car(),
+    new Car("audi", 200),
+    new Car(200),
+    new Car("")
+]
 
-let nameLongerThanFiveChar = testArray.filter(filterNameLongerThanFiveChar);
-console.log(nameLongerThanFiveChar);
-
-
-// nowa tablica bez wartości negatywnych
-
-const filterNonNegativeValue = (element) =>  element === undefined || element === null || Number.isNaN(element)===true ? false : true;
-
-
-
-let nonNegativeValueArr = testArray.filter(filterNonNegativeValue);
-console.log("nonNegativeValueArr", nonNegativeValueArr);
+console.log(cars)
