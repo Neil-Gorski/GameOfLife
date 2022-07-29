@@ -11,7 +11,7 @@ class Car {
         this.fuelConsum = 0.5;      // l/km
         this.haveFuel = true;
         this.mileage = mileage;     // m
-        this.carAcceleration = 5    // km/h²
+        this.carAcceleration = 3.1    // m/s²
     }
 
     setStringValue = (value, defaultValue) => {
@@ -46,23 +46,29 @@ class Car {
         }
         // this.speed = speed > this.maximumSpeed ? this.maximumSpeed : speed;
         // this.speed = speed < 0 ? this.minimumSpeed : speed;
-        console.log(`${this.name} drive with ${this.speed} km/h.`);
+        console.log(`New speed: ${this.speed} km/h.`);
         
     }
 
     accelerate = (howMuch) => {
         if(this.haveFuel){
+            let distance = 0
             const newHowMuch = this.setNumberValue(howMuch, 0);
             newHowMuch < 0 ? 0 : newHowMuch;
             console.log("-----------------------------")
-            console.log(`${this.name} is accelerating.`)
+            console.log(`${this.name} is accelerating. The current speed: ${this.speed}.`)
             this.setFuelUsed(howMuch)
-            this.setSpeed(this.speed + newHowMuch);
+            if (this.haveFuel) {distance = this.accelerateDistance(newHowMuch)}; 
+            if (this.haveFuel) {this.setSpeed(this.speed + newHowMuch)};
+            this.mileage += distance;
+            if (this.haveFuel) {console.log(`The car needed ${distance.toFixed(2)} meter for acceleration.`)}
+            if (this.haveFuel == false) {console.log(`The car run out of fuel... no accelaration posible.`)};
         }else{
             console.log("-----------------------------")
             console.log(`You try to accelerate.`)
             console.log(`${this.name} is out of fuel, fill up the fuel !!! `)
         }
+        console.log(`Current mileage: ${this.getMilage().toFixed(2)} meter.`)
     }
 
     decelerate = (howMuch) => {
@@ -98,20 +104,23 @@ class Car {
             console.log(`${this.name} had ${oldFuelAmount}l and you fill up ${howMuchFilldUp}l, so now are ${this.fuelAmount}l in the tank.`);
         }
     }
-    accelerateDistance = (howMuch) => {
 
+    accelerateDistance = (deltaV) => {  //s = 0,5 · a · t2 + vo · t + s.
+        const time = (deltaV / 3.6) / this.carAcceleration;
+        const distance = (0.5 * this.carAcceleration * time**2) + ((this.speed / 3.6) * time); // speed in m/s 
+        return distance   // in meter
     }
-    
+    getMilage = () => this.mileage;
 };
 
-const firstCar = new Car("BMW", 180);
-firstCar.setColor("black");
-firstCar.getColor();
+// const firstCar = new Car("BMW", 180);
+// firstCar.setColor("black");
+// firstCar.getColor();
 
 
-const secCar = new Car("Opel");
-secCar.setColor("red");
-secCar.getColor();
+// const secCar = new Car("Opel");
+// secCar.setColor("red");
+// secCar.getColor();
 
 
 // const cars = [
@@ -124,15 +133,15 @@ const mojeAuto = new Car("Fiat", 190);
 mojeAuto.accelerate(50);
 mojeAuto.accelerate(50);
 mojeAuto.accelerate(50);
-mojeAuto.accelerate(50);
-mojeAuto.accelerate(50);
-mojeAuto.accelerate(50);
-mojeAuto.accelerate(50);
-mojeAuto.decelerate(40);
-mojeAuto.accelerate(20);
-mojeAuto.fillUpFuel(40);
-mojeAuto.accelerate(40);
-mojeAuto.fillUpFuel(200);
+// mojeAuto.accelerate(50);
+// mojeAuto.accelerate(50);
+// mojeAuto.accelerate(50);
+// mojeAuto.accelerate(50);
+// mojeAuto.decelerate(40);
+// mojeAuto.accelerate(20);
+// mojeAuto.fillUpFuel(40);
+// mojeAuto.accelerate(40);
+// mojeAuto.fillUpFuel(200);
 //mojeAuto.getColor();
 //mojeAuto.setColor("pink")
 
