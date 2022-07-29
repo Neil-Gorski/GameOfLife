@@ -22,7 +22,7 @@ class Car {
         this.carInfo()
     }
 
-    carInfo = () => console.log(`###############\nInfo\nName : ${this.name} \nColor: ${this.color} \nFuel: ${this.fuelAmount} \nMileage: ${this.mileage}\n###############`)
+    carInfo = () => console.log(`###############\nInfo\nName : ${this.name} \nColor: ${this.color} \nFuel: ${this.fuelAmount} \nMileage: ${this.mileage}\nSpeed: ${this.speed}\n###############`)
 
     setStringValue = (value, defaultValue) => {
         return typeof value !== 'string' || value.length === 0 ? defaultValue : value;
@@ -171,7 +171,7 @@ class Car {
 //     new Car(200),
 //     new Car("")
 // ]
-const mojeAuto = new Car("Camaro SS", 190);
+const mojeAuto = new Car("Camaro SS", 190, "Blue");
 // mojeAuto.accelerate(50);
 // mojeAuto.accelerate(50);
 // mojeAuto.drive(460);
