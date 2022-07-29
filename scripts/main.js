@@ -2,7 +2,6 @@ class Car {
     constructor(name, maximumSpeed) {
         this.name = this.setStringValue(name, 'Default Name');
         this.maximumSpeed = this.setNumberValue(maximumSpeed, 200);
-
         this.speed = 0;
         this.numberOfWheels = 4;
         this.numberOfGears = 8;
@@ -30,7 +29,18 @@ class Car {
     }
 
     setSpeed(speed) {
-        this.speed = speed > this.maximumSpeed ? this.maximumSpeed : speed;
+        if (speed > this.maximumSpeed){
+            this.speed = this.maximumSpeed;
+        }else if(speed < 0){
+            this.speed = 0;
+        }else{
+            this.speed = speed;
+        }
+
+
+
+        // this.speed = speed > this.maximumSpeed ? this.maximumSpeed : speed;
+        // this.speed = speed < 0 ? this.minimumSpeed : speed;
         console.log(this.speed);
     }
 
@@ -41,7 +51,9 @@ class Car {
     }
 
     decelerate(howMuch) {
-
+        const newHowMuch = this.setNumberValue(howMuch,0);
+        newHowMuch > 0 ? newHowMuch : 0;
+        this.setSpeed(this.speed - newHowMuch);
     }
 
 }
@@ -66,6 +78,13 @@ const mojeAuto = new Car("Fiat", 190);
 mojeAuto.accelerate(50);
 mojeAuto.accelerate(60);
 mojeAuto.accelerate(100);
-
+mojeAuto.decelerate(50);
+mojeAuto.decelerate(40);
+mojeAuto.accelerate(20);
+mojeAuto.decelerate(200);
+mojeAuto.accelerate(200);
+mojeAuto.decelerate(40);
+mojeAuto.decelerate(500);
+mojeAuto.accelerate(5000);
 
 // console.log(cars)
