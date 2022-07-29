@@ -1,0 +1,94 @@
+.controlPanel__Accelerate {
+	box-shadow: 0px 0px 0px 2px #9fb4f2;
+	background: linear-gradient(to bottom, #78c281 5%, #5f994c 100%);
+	background-color: #78c281;
+	border-radius: 10px;
+	border: 1px solid #4e6096;
+	display: inline-block;
+	cursor: pointer;
+	color: #ffffff;
+	font-family: Arial;
+	font-size: 19px;
+	padding: 12px 37px;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #283966;
+}
+.controlPanel__Accelerate:hover {
+	background: linear-gradient(to bottom, #5f994c 5%, #78c281 100%);
+	background-color: #5f994c;
+}
+.controlPanel__Accelerate:active {
+	position: relative;
+	top: 1px;
+}
+
+.controlPanel__Decelerate {
+	box-shadow: 0px 0px 0px 2px #9fb4f2;
+	background: linear-gradient(to bottom, #c27878 5%, #994c4c 100%);
+	background-color: #c27878;
+	border-radius: 10px;
+	border: 1px solid #4e6096;
+	display: inline-block;
+	cursor: pointer;
+	color: #ffffff;
+	font-family: Arial;
+	font-size: 19px;
+	padding: 12px 37px;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #283966;
+}
+.controlPanel__Decelerate:hover {
+	background: linear-gradient(to bottom, #994c4c 5%, #c27878 100%);
+	background-color: #994c4c;
+}
+.controlPanel__Decelerate:active {
+	position: relative;
+	top: 1px;
+}
+
+.controlPanel__Refuel {
+	box-shadow: 0px 0px 0px 2px #9fb4f2;
+	background: linear-gradient(to bottom, #c2b378 5%, #998c4c 100%);
+	background-color: #c2b378;
+	border-radius: 10px;
+	border: 1px solid #4e6096;
+	display: inline-block;
+	cursor: pointer;
+	color: #ffffff;
+	font-family: Arial;
+	font-size: 19px;
+	padding: 12px 37px;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #283966;
+}
+.controlPanel__Refuel:hover {
+	background: linear-gradient(to bottom, #998c4c 5%, #c2b378 100%);
+	background-color: #998c4c;
+}
+.controlPanel__Refuel:active {
+	position: relative;
+	top: 1px;
+}
+.controlPanel__Drive {
+	box-shadow: 0px 0px 0px 2px #9fb4f2;
+	background: linear-gradient(to bottom, #b678c2 5%, #8f4c99 100%);
+	background-color: #b678c2;
+	border-radius: 10px;
+	border: 1px solid #4e6096;
+	display: inline-block;
+	cursor: pointer;
+	color: #ffffff;
+	font-family: Arial;
+	font-size: 19px;
+	padding: 12px 37px;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #283966;
+}
+.controlPanel__Drive:hover {
+	background: linear-gradient(to bottom, #8f4c99 5%, #b678c2 100%);
+	background-color: #8f4c99;
+}
+.controlPanel__Drive:active {
+	position: relative;
+	top: 1px;
+}
