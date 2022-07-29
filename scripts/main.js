@@ -2,6 +2,7 @@ const btnAccelerate = document.querySelector(".controlPanel__Accelerate");
 const btnDecelerate = document.querySelector(".controlPanel__Decelerate");
 const btnDrive = document.querySelector(".controlPanel__Drive");
 const btnRefuel = document.querySelector(".controlPanel__Refuel");
+const btnInfo = document.querySelector(".controlPanel__Info");
 
 class Car {
     constructor(name, maximumSpeed, color="white", mileage=0, fuelTank=60) {
@@ -170,7 +171,7 @@ class Car {
 //     new Car(200),
 //     new Car("")
 // ]
-const mojeAuto = new Car("Fiat", 190);
+const mojeAuto = new Car("Camaro SS", 190);
 // mojeAuto.accelerate(50);
 // mojeAuto.accelerate(50);
 // mojeAuto.drive(460);
@@ -192,3 +193,4 @@ btnAccelerate.addEventListener("click", function (){mojeAuto.accelerate(20)});
 btnDecelerate.addEventListener("click", function (){mojeAuto.decelerate(40)});
 btnDrive.addEventListener("click", function () {mojeAuto.drive(600)});
 btnRefuel.addEventListener("click", function () {mojeAuto.fillUpFuel(15)});
+btnInfo.addEventListener("click", function () {mojeAuto.carInfo()})
