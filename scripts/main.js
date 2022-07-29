@@ -110,6 +110,14 @@ class Car {
         const distance = (0.5 * this.carAcceleration * time**2) + ((this.speed / 3.6) * time); // speed in m/s 
         return distance   // in meter
     }
+
+    drive = (time) => {
+        this.mileage = time * (this.speed / 3.6); 
+        console.log("-----------------------------")
+        console.log(`Car drives ${time}s with ${this.speed}km/h.`)
+        console.log(`Current mileage: ${this.getMilage().toFixed(2)}m`);
+    }
+
     getMilage = () => this.mileage;
 };
 
@@ -132,6 +140,7 @@ class Car {
 const mojeAuto = new Car("Fiat", 190);
 mojeAuto.accelerate(50);
 mojeAuto.accelerate(50);
+mojeAuto.drive(460);
 mojeAuto.accelerate(50);
 // mojeAuto.accelerate(50);
 // mojeAuto.accelerate(50);
