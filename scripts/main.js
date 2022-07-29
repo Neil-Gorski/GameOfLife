@@ -1,7 +1,8 @@
 class Car {
-    constructor(name, maximumSpeed) {
+    constructor(name, maximumSpeed, color="white") {
         this.name = this.setStringValue(name, 'Default Name');
         this.maximumSpeed = this.setNumberValue(maximumSpeed, 200);
+        this.color = color;
         this.speed = 0;
         this.numberOfWheels = 4;
         this.numberOfGears = 8;
@@ -18,17 +19,17 @@ class Car {
     setColor(color) {
         if (typeof color === 'string') {
             this.color = color;
+            console.log(`The new color of ${this.name} is ${this.color}.`)
         } else {
             throw new Error("Color value should be string");
         }
     }
 
-    getColor() {
-        // console.log('THIS --> ', this);
+    getColor = () => {
+        console.log(`The color of ${this.name} is ${this.color}.`)
         return this.color;
     }
-
-    setSpeed(speed) {
+    setSpeed = (speed) => {
         if (speed > this.maximumSpeed){
             this.speed = this.maximumSpeed;
         }else if(speed < 0){
@@ -36,21 +37,18 @@ class Car {
         }else{
             this.speed = speed;
         }
-
-
-
         // this.speed = speed > this.maximumSpeed ? this.maximumSpeed : speed;
         // this.speed = speed < 0 ? this.minimumSpeed : speed;
-        console.log(this.speed);
+        console.log(`${this.name} drive with ${this.speed} km/h`);
     }
 
-    accelerate(howMuch) {
+    accelerate = (howMuch) => {
         const newHowMuch = this.setNumberValue(howMuch, 0);
         newHowMuch < 0 ? 0 : newHowMuch;
         this.setSpeed(this.speed + newHowMuch);
     }
 
-    decelerate(howMuch) {
+    decelerate = (howMuch) => {
         const newHowMuch = this.setNumberValue(howMuch,0);
         newHowMuch > 0 ? newHowMuch : 0;
         this.setSpeed(this.speed - newHowMuch);
@@ -86,5 +84,7 @@ mojeAuto.accelerate(200);
 mojeAuto.decelerate(40);
 mojeAuto.decelerate(500);
 mojeAuto.accelerate(5000);
+mojeAuto.getColor();
+mojeAuto.setColor("pink")
 
 // console.log(cars)
