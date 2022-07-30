@@ -23,24 +23,35 @@ class Person {
         if (this.isAlive() === false) {
             throw Error('Character cannot attack if is dead!');
         }
-        target.hitPoints = target.hitPoints >= power ? target.hitPoints - power : 0;
-        if (between(1,100) > 75) {
-            this.specialAttack(power);
-        }
+        const realPower = power + this.specialAttack(power);
+        target.hitPoints = target.hitPoints >= realPower ? target.hitPoints - realPower : 0;
+
     }
 
-    specialAttack(power){
-        if (this.type === "vampire"){
-            this.hitPoints += Math.floor(power * 0.1);
-            console.log("Special Attack done.")
+    specialAttack(power) {
+        let result = 0;
+
+        const value = between(0, 100);
+        let specialAttackPoints = 0;
+
+        if (this.type === "vampire" && value > 75) {
+            specialAttackPoints = Math.ceil(power * 0.15);
+            this.hitPoints += specialAttackPoints;
+            console.log(`Vampire Attack done! (recovered: ${specialAttackPoints} hp).`);
         }
+
+        if (this.type === "human" && value > 90) {
+            result = Math.floor(power * 1.5);
+            console.log(`Human attack done! (extra hit: ${result}) hp`);
+        }
+
+        return result;
     }
 }
 
 export class Hero extends Person {
     constructor(name, hitPoints, type) {
         super(name, hitPoints, type);
-
     }
 }
 
