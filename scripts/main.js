@@ -22,7 +22,7 @@ class Car {
         this.carInfo()
     }
 
-    carInfo = () => console.log(`###############\nInfo\nName : ${this.name} \nColor: ${this.color} \nFuel: ${this.fuelAmount} \nMileage: ${this.mileage}\nSpeed: ${this.speed}\n###############`)
+    carInfo = () => console.log(`###############\nInfo\nName : ${this.name} \nColor: ${this.color} \nFuel: ${this.fuelAmount.toFixed(2)} \nMileage: ${this.mileage.toFixed(2)}\nSpeed: ${this.speed}\n###############`)
 
     setStringValue = (value, defaultValue) => {
         return typeof value !== 'string' || value.length === 0 ? defaultValue : value;
@@ -103,7 +103,7 @@ class Car {
     }
 
     setFuelUsed = (howMuch, drive) => {
-        const fuelMultiplikator = drive ? 1/40 * ((this.speed + 1)**0.5) : 1/80 * ((this.speed + 1)**0.5); 
+        const fuelMultiplikator = drive ?  1/30 * ((this.speed + 1)**0.5) : 1/80 * ((this.speed + 1)**0.5); 
         
         const fuelUsed = (this.fuelConsum * fuelMultiplikator) * (howMuch > this.maximumSpeed - this.speed ? this.maximumSpeed - this.speed : howMuch);
         this.fuelAmount = this.fuelAmount - fuelUsed;
@@ -112,7 +112,7 @@ class Car {
             this.haveFuel = false;
             console.log(`${this.name} is out of fuel`);
         }else{
-            console.log(`Car used ${fuelUsed} liter fuel.`);
+            console.log(`Car used ${fuelUsed.toFixed(2)} liter fuel.`);
         }
         console.log(`${this.fuelAmount.toFixed(2)} liter fuel left over.`);
     }
