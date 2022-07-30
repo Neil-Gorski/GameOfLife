@@ -1,11 +1,15 @@
 function between(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
+
+const characterTypes=["vampir", "human"]
+
 class Person {
-    constructor(name = "", hitPoints = 0) {
+    constructor(name = "", hitPoints = 0, type) {
         this.name = name;
         this.hitPoints = hitPoints;
         this.strength = 0;
+        this.type = type;
     }
 
     isAlive() {
@@ -21,18 +25,29 @@ class Person {
             throw Error('Character cannot attact if is dead!');
         }
         target.hitPoints = target.hitPoints >= power ? target.hitPoints - power : 0;
+        if (between(1,100) > 75) {
+            this.specialAttack(power);
+        } 
+    }
+
+    specialAttack(power){
+        if (this.type === "vampir"){
+            this.hitPoints += Math.floor(power * 0.1);
+            console.log("Special Attack done.")
+        }
     }
 }
 
 class Hero extends Person {
-    constructor(name, hitPoints) {
-        super(name, hitPoints);
+    constructor(name, hitPoints, type) {
+        super(name, hitPoints, type);
+        
     }
 }
 
 class Villain extends Person {
-    constructor(name, hitPoints) {
-        super(name, hitPoints);
+    constructor(name, hitPoints, type) {
+        super(name, hitPoints, type);
     }
 }
 
@@ -49,14 +64,18 @@ function isTeamAlive(team) {
     return team.length > 0;
 }
 
-const heroesTeam = [];
-const villainsTeam = [];
-const teamMembersCount = 5;
-
-for (let i = 0; i < teamMembersCount; i++) {
-    heroesTeam.push(new Hero("Hero " + (i + 1), between(80, 150)));
-    villainsTeam.push(new Villain("Villain " + (i + 1), between(80, 150)));
+function createTeam(characterClass,  membersCount, name) {
+    const team = [];
+    for (let i = 0; i < membersCount; i++) {
+        team.push(new characterClass(name +" "+  (i + 1), between(80, 150), characterTypes[between(0,1)]));
+    }
+    return team;
 }
+
+
+const heroesTeam = createTeam(Hero, 5, "Hero");
+const villainsTeam = createTeam(Villain, 5, "Villian");
+    
 
 while (isTeamAlive(heroesTeam) && isTeamAlive(villainsTeam)) {
     const currentHeroIndex = between(0, heroesTeam.length - 1);
