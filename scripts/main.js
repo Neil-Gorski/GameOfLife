@@ -1,3 +1,6 @@
+function between (min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
 class Person {
     constructor(name = "") {
         this.name = name;
@@ -36,18 +39,17 @@ const villain = new Villain("Villain");
 hero.setHitPoints(100);
 villain.setHitPoints(100);
 
-console.log(hero);
-console.log(villain);
+function duel(character1, character2){
+    character1.attack(between(1,15), character2);
+    character2.attack(between(1,15), character1);
+    console.log(character1);
+    console.log(character2);
 
-hero.attack(80, villain);
-villain.attack(50, hero);
-hero.attack(40, villain);
-villain.attack(20, hero);
+}
 
-console.log(hero);
-console.log(villain);
-
-
+while(villain.isAlive() && hero.isAlive()){
+    duel(hero, villain)
+}
 // console.log("character instanceof Character:", character instanceof Character);
 // console.log("hero instanceof Person:", hero instanceof Person);
 // console.log("firstPerson instanceof Person:", firstPerson instanceof Person);
