@@ -17,8 +17,6 @@ class Car {
     }
 
     setColor = (color) =>{
-    //     return typeof color === 'string' ? this.color = color : throw new Error("Color value should be string");
-    // }
         if (typeof color === 'string') {
             this.color = color;
         } else {
@@ -33,10 +31,8 @@ class Car {
 
     setSpeed(speed) {
         this.speed = speed > this.maximumSpeed ? this.maximumSpeed : speed; //dorobic minimum
-        console.log(this.speed);
     }
 
-    //ponizej podzło coś nie tak
     accelerate(howMuch) {
         const newHowMuch = this.setNumberValue(howMuch, 0);
         this.setSpeed(this.speed + newHowMuch);
@@ -45,8 +41,6 @@ class Car {
     decelerate(howMuch) {
         const howMuchDecelerate = this.setNumberValue(howMuch, 0);
         this.setSpeed(this.speed - howMuchDecelerate <0 ? 0 : this.speed - howMuchDecelerate);
-
-//dorobić trzeba odejmowac predkosc i dorobic set speed nie moze byc ponizej zera
     }
 
 }
@@ -77,3 +71,64 @@ mojeAuto.decelerate(100);
 mojeAuto.decelerate(50);
 
 // console.log(cars)
+
+
+
+
+//-----------------------------------------
+
+
+
+
+class Person {
+    constructor() {
+        this.hitPoints = 0;
+        this.strength = 0;
+    }
+
+    isAlive() {
+        return this.hitPoints > 0;
+    }
+}
+
+
+class Character extends Person {
+    constructor() {
+        super();
+
+        this.isAlive();
+
+    }
+
+    isAlive() {
+        return this.hitPoints > 100;
+    }
+
+}
+
+
+const character = new Character();
+const hero = new Character();
+
+const firstPerson = new Person();
+
+hero.isAlive();
+character.isAlive();
+
+
+character.isAlive();
+
+
+function testFun(anyCharacter) {
+    if (anyCharacter instanceof Character) {
+        return anyCharacter.isAlive();
+    }
+}
+
+
+console.log("character instanceof Character:", character instanceof Character);
+console.log("hero instanceof Person:", hero instanceof Person);
+console.log("firstPerson instanceof Person:", firstPerson instanceof Person);
+console.log("firstPerson instanceof Character):", firstPerson instanceof Character);
+
+
