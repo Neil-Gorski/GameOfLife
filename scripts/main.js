@@ -13,8 +13,8 @@ class Person {
         this.hitPoints = hp;
     }
 
-    attack() {
-
+    attack(power, target) {
+      target.hitPoints = target.hitPoints >= power ? target.hitPoints - power : 0;
     }
 }
 
@@ -33,15 +33,16 @@ class Villain extends Person {
 const hero = new Hero("Hero");
 const villain = new Villain("Villain");
 
-hero.hitPoints(100);
-villain.hitPoints(110);
+hero.setHitPoints(100);
+villain.setHitPoints(100);
 
 console.log(hero);
 console.log(villain);
 
-hero.attack();
-villain.attack();
-
+hero.attack(80, villain);
+villain.attack(50, hero);
+hero.attack(40, villain);
+villain.attack(20, hero);
 
 console.log(hero);
 console.log(villain);
