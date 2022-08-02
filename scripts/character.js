@@ -1,12 +1,11 @@
-import { between } from './utilis.js';
+import { between, getClassName } from './utilis.js';
 
 export const characterTypes = ["vampire", "human"]
 
 class Person {
-    constructor(name = "", hitPoints = 0, type) {
+    constructor(name = "", type) {
         this.id = Date.now().toString(36) + Math.random().toString(36).substring(2);
         this.name = name;
-        this.hitPoints = hitPoints;
         this.strength = 0;
         this.type = type;
     }
@@ -50,13 +49,29 @@ class Person {
 }
 
 export class Hero extends Person {
-    constructor(name, hitPoints, type) {
-        super(name, hitPoints, type);
+    constructor(type) {
+        const characterName = "Hero";
+        super(characterName, type);
     }
 }
 
 export class Villain extends Person {
-    constructor(name, hitPoints, type) {
-        super(name, hitPoints, type);
+    constructor(type) {
+        const characterName = "Villain";
+        super(characterName, type);
     }
+}
+
+export function createCharacter(characterClass, gameDetails) {
+    const character = new characterClass(characterTypes[between(0, 1)]);
+    const className = getClassName(character);
+    const minHp = eval(`gameDetails.${className}.characterHitPoints.min`);
+    const maxHp = eval(`gameDetails.${className}.characterHitPoints.max`);
+    character.setHitPoints(between(minHp, maxHp));
+    return character;
+}
+
+export function getRandomCharacter(team) {
+    const currentCharacterIndex = between(0, team.length - 1);
+    return team[currentCharacterIndex];
 }
