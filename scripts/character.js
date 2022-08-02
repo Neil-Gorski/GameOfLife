@@ -18,7 +18,15 @@ class Person {
         this.hitPoints = hp;
     }
 
-    attack(power, target) {
+    setPowerAttack(minPowerAttack, maxPowerAttack) {
+        this.powerAttack = {
+            min: minPowerAttack,
+            max: maxPowerAttack
+        }
+    }
+
+    attack(target) {
+        const power = this.getPowerAttack();
         if (this.isAlive() === false) {
             throw Error('Character cannot attack if is dead!');
         }
@@ -46,6 +54,10 @@ class Person {
 
         return result;
     }
+
+    getPowerAttack() {
+        return between(this.powerAttack.min, this.powerAttack.max)
+    }
 }
 
 export class Hero extends Person {
@@ -62,12 +74,19 @@ export class Villain extends Person {
     }
 }
 
-export function createCharacter(characterClass, gameDetails) {
+export function createCharacter(characterClass, gameConfig) {
     const character = new characterClass(characterTypes[between(0, 1)]);
     const className = getClassName(character);
-    const minHp = eval(`gameDetails.${className}.characterHitPoints.min`);
-    const maxHp = eval(`gameDetails.${className}.characterHitPoints.max`);
+
+    const minHp = gameConfig[className].characterHitPoints.min;
+    const maxHp = gameConfig[className].characterHitPoints.max;
     character.setHitPoints(between(minHp, maxHp));
+
+    const characterMinPowerAttack = gameConfig[className].characterAttackPower.min;
+    const characterMaxPowerAttack = gameConfig[className].characterAttackPower.max;
+
+    character.setPowerAttack(characterMinPowerAttack, characterMaxPowerAttack);
+
     return character;
 }
 

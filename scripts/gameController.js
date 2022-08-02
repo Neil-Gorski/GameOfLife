@@ -10,7 +10,7 @@ export class GameController {
 
     createTeam(characterClass) {
         const team = [];
-        const membersCount = eval(`this.gameConfig.${characterClass.name.toLowerCase()}.teamMembersCount`)
+        const membersCount = this.gameConfig[characterClass.name.toLowerCase()].teamMembersCount;
         for (let i = 0; i < membersCount; i++) {
             team.push(createCharacter(characterClass, this.gameConfig));
         }
@@ -40,17 +40,12 @@ export class GameController {
 
     duel(character1, character2) {
 
-        character1.attack(this.getPowerAttack(character1), character2);
+        character1.attack(character2);
 
-        if (character2.isAlive()) character2.attack(this.getPowerAttack(character2), character1);
+        if (character2.isAlive()) {
+            character2.attack(character1);
+        }
 
-    }
-
-    getPowerAttack(character) {
-        const className = getClassName(character);
-        const characterMinPowerAttack = eval(`this.gameConfig.${className}.characterAttackPower.min`);
-        const characterMaxPowerAttack = eval(`this.gameConfig.${className}.characterAttackPower.max`);
-        return between(characterMinPowerAttack, characterMaxPowerAttack)
     }
 
     isTeamAlive(team) {
