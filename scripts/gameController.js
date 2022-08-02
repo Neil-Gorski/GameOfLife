@@ -4,13 +4,15 @@ import { between, getClassName } from './utilis.js';
 export class GameController {
     constructor(gameLevel) {
         this.gameConfig = this.setGameLevel(gameLevel);
-        this.heroesTeam = this.createTeam(Hero);
-        this.villainsTeam = this.createTeam(Villain);
+        this.heroesTeam = [];
+        this.villainsTeam = [];
     }
 
-    createTeam(characterClass) {
+    createTeam(characterClass, membersCount) {
         const team = [];
-        const membersCount = this.gameConfig[characterClass.name.toLowerCase()].teamMembersCount;
+
+        // const membersCount = this.gameConfig[characterClass.name.toLowerCase()].teamMembersCount;
+
         for (let i = 0; i < membersCount; i++) {
             team.push(createCharacter(characterClass, this.gameConfig));
         }
