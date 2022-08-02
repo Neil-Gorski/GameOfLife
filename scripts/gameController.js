@@ -1,29 +1,33 @@
-import { characterTypes, Hero, Villain } from './character.js';
-import { between } from './utilis.js';
+import { Hero, Villain, createCharacter, getRandomCharacter } from './character.js';
+import { between, getClassName } from './utilis.js';
 
 export class GameController {
     constructor(gameLevel) {
-        this.gameDetails = this.setGameLevel(gameLevel);
-        this.heroesTeam = this.createTeam(Hero, this.gameDetails.hero.teamMembersCount, "Hero");
-        this.villainsTeam = this.createTeam(Villain, this.gameDetails.villain.teamMembersCount, "Villain");
+        this.gameConfig = this.setGameLevel(gameLevel);
+        this.heroesTeam = this.createTeam(Hero);
+        this.villainsTeam = this.createTeam(Villain);
     }
 
-    createTeam(characterClass, membersCount, name) {
+    createTeam(characterClass) {
         const team = [];
+        const membersCount = eval(`this.gameConfig.${characterClass.name.toLowerCase()}.teamMembersCount`)
         for (let i = 0; i < membersCount; i++) {
-            const minHp = name === "Hero" ? this.gameDetails.hero.characterHitPoints.min : this.gameDetails.villain.characterHitPoints.min;
-            const maxHp = name === "Hero" ? this.gameDetails.hero.characterHitPoints.max : this.gameDetails.villain.characterHitPoints.max;
-            team.push(new characterClass(name + " " + (i + 1), between(minHp, maxHp), characterTypes[between(0, 1)]));
+            team.push(createCharacter(characterClass, this.gameConfig));
         }
         return team;
     }
 
     battle() {
-        while (isTeamAlive(this.heroesTeam) && isTeamAlive(this.villainsTeam)) {
-            const currentHero = randomCharacter(this.heroesTeam);
-            const currentVillain = randomCharacter(this.villainsTeam);
+        while (this.isTeamAlive(this.heroesTeam) && this.isTeamAlive(this.villainsTeam)) {
+            const currentHero = getRandomCharacter(this.heroesTeam);
+            const currentVillain = getRandomCharacter(this.villainsTeam);
 
-            between(0, 1) === 1 ? this.duel(currentHero, currentVillain) : this.duel(currentVillain, currentHero);
+            // who goes first logic
+            if (between(0, 1) === 1 || this.gameConfig.heroStarts === true) {
+                this.duel(currentHero, currentVillain);
+            } else {
+                this.duel(currentVillain, currentHero);
+            }
 
             if (currentHero.isAlive() === false) {
                 this.heroesTeam = this.heroesTeam.filter(hero => hero.id !== currentHero.id);
@@ -35,23 +39,30 @@ export class GameController {
     }
 
     duel(character1, character2) {
-        const character1minPowerAttack = character1 instanceof Hero ? this.gameDetails.hero.characterAttackPower.min : this.gameDetails.villain.characterAttackPower.min;
-        const character1maxPowerAttack = character1 instanceof Hero ? this.gameDetails.hero.characterAttackPower.max : this.gameDetails.villain.characterAttackPower.max;
-        character1.attack(between(character1minPowerAttack, character1maxPowerAttack), character2);
-        if (character2.isAlive()) {
-            const character2minPowerAttack = character2 instanceof Hero ? this.gameDetails.hero.characterAttackPower.min : this.gameDetails.villain.characterAttackPower.min;
-            const character2maxPowerAttack = character2 instanceof Hero ? this.gameDetails.hero.characterAttackPower.max : this.gameDetails.villain.characterAttackPower.max;
-            character2.attack(between(character2minPowerAttack, character2maxPowerAttack), character1);
-        }
+
+        character1.attack(this.getPowerAttack(character1), character2);
+
+        if (character2.isAlive()) character2.attack(this.getPowerAttack(character2), character1);
+
+    }
+
+    getPowerAttack(character) {
+        const className = getClassName(character);
+        const characterMinPowerAttack = eval(`this.gameConfig.${className}.characterAttackPower.min`);
+        const characterMaxPowerAttack = eval(`this.gameConfig.${className}.characterAttackPower.max`);
+        return between(characterMinPowerAttack, characterMaxPowerAttack)
+    }
+
+    isTeamAlive(team) {
+        return team.length > 0;
     }
 
     setGameLevel(gameLevel) {
-
         if (gameLevel === "easy") {
             return {
+                heroStarts: true, // if false random
                 hero: {
                     teamMembersCount: 5,
-                    heroBegins: false, // if false random who starts a battle
                     characterHitPoints: {
                         min: 80,
                         max: 200
@@ -62,9 +73,10 @@ export class GameController {
                     }
                 },
 
+                // default
+                heroStarts: false,
                 villain: {
                     teamMembersCount: 4,
-                    heroBegins: false, // if false random who starts a battle
                     characterHitPoints: {
                         min: 50,
                         max: 100
@@ -107,13 +119,3 @@ export class GameController {
     }
 }
 
-
-
-function isTeamAlive(team) {
-    return team.length > 0;
-}
-
-function randomCharacter(team) {
-    const currentCharacterIndex = between(0, team.length - 1);
-    return team[currentCharacterIndex];
-}
