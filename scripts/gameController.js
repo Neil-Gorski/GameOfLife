@@ -67,9 +67,6 @@ export class GameController {
                         max: 20,
                     }
                 },
-
-                // default
-                heroStarts: false,
                 villain: {
                     teamMembersCount: 4,
                     characterHitPoints: {
@@ -85,6 +82,8 @@ export class GameController {
         }
 
         return {
+            // default
+            heroStarts: false,
             hero: {
                 teamMembersCount: 5,
                 heroBegins: false, // if false random who starts a battle
