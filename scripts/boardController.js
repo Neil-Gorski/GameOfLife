@@ -10,10 +10,12 @@ export class BoardController {
 
 
         this.startButton.addEventListener("click",  function (){
+            //TODO: Finish start battle button
             console.log("Click button");
         })
         console.log(this.startButton);
         this.createTeamsButton.addEventListener("click", () => {
+            //TODO: read value from Hero team input and Villain team input
             const teamCount = this.teamCountInput.value;
             console.log(teamCount);
             this.gameController.heroesTeam = this.gameController.createTeam(Hero, teamCount);

@@ -54,6 +54,7 @@ export class GameController {
         return team.length > 0;
     }
 
+    // TODO: Use game config to fill team count inputs
     setGameLevel(gameLevel) {
         if (gameLevel === "easy") {
             return {
