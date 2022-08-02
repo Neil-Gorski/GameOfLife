@@ -4,11 +4,125 @@
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'>
     <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <link rel='stylesheet' href='./rpgui/rpgui.min.css'>
     <link rel="stylesheet" href="./style/style.css">
     <title>Java script - project</title>
 </head>
 <body>
+<div class='rpgui-content'>
+    <div class='game-wrapper'>
 
-<script type="module" src='./scripts/main.js'></script>
+        <div class='game-board rpgui-container framed'>
+            <div class='teamA-wrapper team-wrapper' id='teamA-wrapper'>
+            </div>
+
+            <div class='teamB-wrapper team-wrapper' id='teamB-wrapper'>
+                <div class='character-card rpgui-container framed-golden'>
+                    <div class='name'>Hero</div>
+                    <div class='hp'>100</div>
+                    <div class='strength'>50</div>
+                    <div class='weapon-name'>Axe</div>
+                    <div class='progress-wrapper'>
+                        <label>HP:</label>
+                        <div class='rpgui-progress red' ></div>
+                    </div>
+
+                    <div class='progress-wrapper'>
+                        <label>Strength:</label>
+                        <div class='rpgui-progress green' ></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class='game-controller'>
+            <!--            <input type='text' value='Test input' id="input-name">-->
+            <!--            <input type='text' value='Test input' id="input-hitPoints">-->
+            <!--            <input type='text' value='Test input' id="input-strength">-->
+            <!--            <input type='text' value='Test input' id="input-weaponName">-->
+            <input type='number' value='5' id='input-team-count'>
+
+            <!--            <button class="rpgui-button" id='button-random' type="button"><p>Random character</p></button>-->
+            <button class='rpgui-button' id='button-generate-teams' type='button'><p>Generate random teams</p></button>
+            <button class='rpgui-button golden' id='button-start-game' type='button'><p>Start game</p></button>
+
+            <!--            <select class='rpgui-dropdown' id="select-team">-->
+            <!--                <option value='teamA'>Team A</option>-->
+            <!--                <option value='teamB'>Team B</option>-->
+            <!--            </select>-->
+        </div>
+
+
+    </div>
+
+
+    <div class='game-example'>
+
+        <div class='rpgui-container rpgui-draggable'>
+            <!-- rpgui elements goes here -->
+        </div>
+
+
+        <input class='rpgui-slider' type='range' min='0' max='10' value='8'>
+
+        <input class='rpgui-slider golden' type='range' min='0' max='10' value='8'>
+
+        <div class='rpgui-progress'></div>
+
+        <label>Red bar:</label>
+        <div class='rpgui-progress red'></div>
+
+        <label>Blue bar:</label>
+        <div class='rpgui-progress blue'></div>
+
+        <label>Green bar:</label>
+        <div class='rpgui-progress green'></div>
+
+        <div class='rpgui-icon sword'></div>
+        <div class='rpgui-icon shield'></div>
+        <div class='rpgui-icon exclamation'></div>
+        <div class='rpgui-icon potion-red'></div>
+        <div class='rpgui-icon potion-green'></div>
+        <div class='rpgui-icon potion-blue'></div>
+        <div class='rpgui-icon weapon-slot'></div>
+        <div class='rpgui-icon shield-slot'></div>
+        <div class='rpgui-icon armor-slot'></div>
+        <div class='rpgui-icon helmet-slot'></div>
+        <div class='rpgui-icon ring-slot'></div>
+        <div class='rpgui-icon potion-slot'></div>
+        <div class='rpgui-icon magic-slot'></div>
+        <div class='rpgui-icon shoes-slot'></div>
+        <div class='rpgui-icon empty-slot'></div>
+
+        <select class='rpgui-dropdown'>
+            <option value='option1'>option1</option>
+            <option value='option2'>option2</option>
+        </select>
+
+        <select class='rpgui-list' size='5'>
+            <option value='option1'>option1</option>
+            <option value='option2'>option2</option>
+        </select>
+
+        <button class='rpgui-button' type='button'><p>Click me!</p></button>
+        <button class='rpgui-button golden' type='button'><p>Click me golden!</p></button>
+
+        <hr class='golden'>
+        <input class='rpgui-checkbox' type='checkbox'><label>This is checkbox.</label>
+
+        <input type='text' value='Test input'>
+
+
+    </div>
+</div>
+
+
+
+<script src='./rpgui/rpgui.min.js'></script>
+<script type='module' src='./scripts/main.js'></script>
 </body>
+</html>
+
 </html>
