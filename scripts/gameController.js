@@ -23,7 +23,7 @@ export class GameController {
             const currentVillain = getRandomCharacter(this.villainsTeam);
 
             // who goes first logic
-            if (between(0, 1) === 1 || this.gameConfig.heroStarts === true) {
+            if (between(0, 1) === 1 || this.gameConfig.gameLevel.heroStarts === true) {
                 this.duel(currentHero, currentVillain);
             } else {
                 this.duel(currentVillain, currentHero);
