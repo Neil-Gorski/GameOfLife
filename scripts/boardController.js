@@ -39,20 +39,49 @@ export class BoardController {
     };
 
     renderTeams = () => {
+        const teamAWrapper = this.gameContainer.querySelector("#teamA-wrapper");
+        const teamBWrapper = this.gameContainer.querySelector("#teamB-wrapper");
 
-        // <div className='character-card rpgui-container framed-golden'>
-        //     <div className='name'>Hero</div>
-        //     <div className='hp'>100</div>
-        //     <div className='strength'>50</div>
-        //     <div className='weapon-name'>Axe</div>
-        //     <div className='progress-wrapper'>
+        const characterCard = document.createElement("div");
+        characterCard.classList.add('character-card', 'rpgui-container', 'framed-golden');
+        // console.log(characterCard);
+        
+        characterCard.innerHTML = `
+            <div class='name'>Hero</div>
+            <div class='hp'>100</div>
+            <div class='strength'>50</div>
+            <div class='weapon-name'>Axe</div>
+            <div class='progress-wrapper'>
+                <label>HP:</label>
+                <div class='rpgui-progress red'></div>
+            </div>
+            <div class='progress-wrapper'>
+                 <label>Strength:</label>
+                 <div class='rpgui-progress green'></div>
+             </div>`;
+
+        teamAWrapper.appendChild(characterCard);
+        console.log(teamAWrapper);
+
+        teamBWrapper.appendChild(characterCard);
+
+
+
+
+
+        // <div class='character-card rpgui-container framed-golden'>
+        //     <div class='name'>Hero</div>
+        //     <div class='hp'>100</div>
+        //     <div class='strength'>50</div>
+        //     <div class='weapon-name'>Axe</div>
+        //     <div class='progress-wrapper'>
         //         <label>HP:</label>
-        //         <div className='rpgui-progress red'></div>
-        //     </div>
+        //         <div class='rpgui-progress red'></div>
+        // //     </div>
         //
-        //     <div className='progress-wrapper'>
+        //     <div class='progress-wrapper'>
         //         <label>Strength:</label>
-        //         <div className='rpgui-progress green'></div>
+        //         <div class='rpgui-progress green'></div>
         //     </div>
         // </div>
 
