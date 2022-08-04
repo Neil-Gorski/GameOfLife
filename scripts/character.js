@@ -74,16 +74,16 @@ export class Villain extends Person {
     }
 }
 
-export function createCharacter(characterClass, gameConfig) {
+export function createCharacter(characterClass, gameLevel) {
     const character = new characterClass(characterTypes[between(0, 1)]);
     const className = getClassName(character);
 
-    const minHp = gameConfig[className].characterHitPoints.min;
-    const maxHp = gameConfig[className].characterHitPoints.max;
+    const minHp = gameLevel[className].characterHitPoints.min;
+    const maxHp = gameLevel[className].characterHitPoints.max;
     character.setHitPoints(between(minHp, maxHp));
 
-    const characterMinPowerAttack = gameConfig[className].characterAttackPower.min;
-    const characterMaxPowerAttack = gameConfig[className].characterAttackPower.max;
+    const characterMinPowerAttack = gameLevel[className].characterAttackPower.min;
+    const characterMaxPowerAttack = gameLevel[className].characterAttackPower.max;
 
     character.setPowerAttack(characterMinPowerAttack, characterMaxPowerAttack);
 

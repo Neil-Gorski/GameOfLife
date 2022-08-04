@@ -42,8 +42,16 @@
             <!--            <input type='text' value='Test input' id="input-hitPoints">-->
             <!--            <input type='text' value='Test input' id="input-strength">-->
             <!--            <input type='text' value='Test input' id="input-weaponName">-->
-            <!--            TODO: Input per team -->
-            <input type='number' value='5' id='input-team-count'>
+            <div class="teams-sizes">
+                <div class="teams-sizes-title">Number of players:</div> 
+                    <div class="team-container">
+                        <span>Heroes</span><input type='number' id='input-hero-count'>
+                    </div>
+                    <div class="team-container">
+                        <span>Villains</span><input type='number' id='input-villain-count'>
+                    </div>
+                </div>
+            </div>
 
             <!--            <button class="rpgui-button" id='button-random' type="button"><p>Random character</p></button>-->
             <button class='rpgui-button' id='button-generate-teams' type='button'><p>Generate random teams</p></button>

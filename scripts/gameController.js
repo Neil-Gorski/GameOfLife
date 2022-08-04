@@ -2,19 +2,17 @@ import { Hero, Villain, createCharacter, getRandomCharacter } from './character.
 import { between, getClassName } from './utilis.js';
 
 export class GameController {
-    constructor(gameLevel) {
-        this.gameConfig = this.setGameLevel(gameLevel);
+    constructor(gameConfig) {
         this.heroesTeam = [];
         this.villainsTeam = [];
+        this.gameConfig = gameConfig;
     }
 
     createTeam(characterClass, membersCount) {
         const team = [];
 
-        // const membersCount = this.gameConfig[characterClass.name.toLowerCase()].teamMembersCount;
-
         for (let i = 0; i < membersCount; i++) {
-            team.push(createCharacter(characterClass, this.gameConfig));
+            team.push(createCharacter(characterClass, this.gameConfig.gameLevel));
         }
         return team;
     }
@@ -53,66 +51,4 @@ export class GameController {
     isTeamAlive(team) {
         return team.length > 0;
     }
-
-    // TODO: Use game config to fill team count inputs
-    setGameLevel(gameLevel) {
-        if (gameLevel === "easy") {
-            return {
-                heroStarts: true, // if false random
-                hero: {
-                    teamMembersCount: 5,
-                    characterHitPoints: {
-                        min: 80,
-                        max: 200
-                    },
-                    characterAttackPower: {
-                        min: 1,
-                        max: 20,
-                    }
-                },
-                villain: {
-                    teamMembersCount: 4,
-                    characterHitPoints: {
-                        min: 50,
-                        max: 100
-                    },
-                    characterAttackPower: {
-                        min: 1,
-                        max: 10,
-                    }
-                }
-            }
-        }
-
-        return {
-            // default
-            heroStarts: false,
-            hero: {
-                teamMembersCount: 5,
-                heroBegins: false, // if false random who starts a battle
-                characterHitPoints: {
-                    min: 80,
-                    max: 150,
-                },
-                characterAttackPower: {
-                    min: 1,
-                    max: 15,
-                }
-            },
-
-            villain: {
-                teamMembersCount: 5,
-                heroBegins: false, // if false random who starts a battle
-                characterHitPoints: {
-                    min: 80,
-                    max: 150,
-                },
-                characterAttackPower: {
-                    min: 1,
-                    max: 15,
-                }
-            }
-        }
-    }
 }
-

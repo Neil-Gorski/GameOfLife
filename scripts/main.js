@@ -1,14 +1,11 @@
 import { GameController } from './gameController.js';
 import { BoardController } from './boardController.js';
+import { GameConfig } from './gameConfig.js';
 
 function mainGame() {
-    const game = new GameController();
-    const board = new BoardController(document.querySelector(".game-wrapper"), game);
-
-    // game.battle();
-
-    console.log(game.heroesTeam);
-    console.log(game.villainsTeam);
+    const config = new GameConfig();
+    const game = new GameController(config);
+    const board = new BoardController(document.querySelector(".game-wrapper"), game, config);
 }
 
 mainGame();
