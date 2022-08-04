@@ -25,8 +25,11 @@ export class BoardController {
         });
 
         this.createTeamsButton.addEventListener('click', () => {
-            const teamHeroCountInput = this.teamHeroCountInput.value;
-            const teamVillainCountInput = this.teamVillainCountInput.value;
+            const teamHeroCountInput = this.teamHeroCountInput.value > 20 ? this.gameConfig.gameLevel.hero.teamMembersCount : this.teamHeroCountInput.value;
+            const teamVillainCountInput = this.teamVillainCountInput.value > 20 ? this.gameConfig.gameLevel.villain.teamMembersCount : this.teamVillainCountInput.value;
+
+            this.teamHeroCountInput.value = teamHeroCountInput;
+            this.teamVillainCountInput.value = teamVillainCountInput;
 
             this.gameController.heroesTeam = this.gameController.createTeam(Hero, teamHeroCountInput);
             this.gameController.villainsTeam = this.gameController.createTeam(Villain, teamVillainCountInput);
@@ -42,37 +45,44 @@ export class BoardController {
         const teamAWrapper = this.gameContainer.querySelector("#teamA-wrapper");
         const teamBWrapper = this.gameContainer.querySelector("#teamB-wrapper");
 
-        const characterCard = document.createElement("div");
-        characterCard.classList.add('character-card', 'rpgui-container', 'framed-golden');
-        // console.log(characterCard);
-        
-        characterCard.innerHTML = `
-            <div class='name'>Hero</div>
-            <div class='hp'>100</div>
-            <div class='strength'>50</div>
-            <div class='weapon-name'>Axe</div>
-        `;
+        this.renderTeam(this.gameController.heroesTeam, teamAWrapper);
+        this.renderTeam(this.gameController.villainsTeam, teamBWrapper);
+    }
 
-        const progressHp = generateProgressBar("HP", "red", 1);
-        const progressStrength = generateProgressBar("Strength", "green", 1);
+    renderTeam = (team, wrapper) => {
+        wrapper.innerHTML = '';
+        for (const character of team) {
+            const characterCard = document.createElement("div");
+            characterCard.classList.add('character-card', 'rpgui-container', 'framed-golden');
+            // console.log(characterCard);
 
-        characterCard.appendChild(progressHp);
-        characterCard.appendChild(progressStrength);
+            characterCard.innerHTML = `
+                    <div class='name'>${character.name}</div>
+                    <div class='hp'>${character.hitPoints}</div>
+                    <div class='strength'>${character.strength}</div>
+                    <div class='weapon-name'>${character.type}</div>
+                `;
 
-        teamAWrapper.appendChild(characterCard);
-        console.log(teamAWrapper);
+            const progressHp = generateProgressBar("HP", "red", character.getCurrentPercentHitPoints());
+            const progressStrength = generateProgressBar("Strength", "green", 1);
 
-        teamBWrapper.appendChild(characterCard);
-    };
-}
+            characterCard.appendChild(progressHp);
+            characterCard.appendChild(progressStrength);
 
-function generateProgressBar(labelName, color, value){
+            wrapper.appendChild(characterCard);
+        }
+    }
+};
+
+
+
+function generateProgressBar(labelName, color, value) {
     const progressBar = document.createElement('div');
     progressBar.classList.add('progress-wrapper');
     const label = document.createElement('label');
     label.innerText = labelName;
     const progressInner = document.createElement('div');
-    progressInner.classList.add('rpgui-progress', color );
+    progressInner.classList.add('rpgui-progress', color);
 
     progressBar.appendChild(label);
     progressBar.appendChild(progressInner);

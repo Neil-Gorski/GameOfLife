@@ -8,6 +8,7 @@ class Person {
         this.name = name;
         this.strength = 0;
         this.type = type;
+        this.initialHitPoints = null;
     }
 
     isAlive() {
@@ -16,6 +17,13 @@ class Person {
 
     setHitPoints(hp) {
         this.hitPoints = hp;
+        if (this.initialHitPoints === null) {
+            this.initialHitPoints = hp;
+        }
+    }
+
+    getCurrentPercentHitPoints() {
+        return this.hitPoints / this.initialHitPoints;
     }
 
     setPowerAttack(minPowerAttack, maxPowerAttack) {
