@@ -51,40 +51,33 @@ export class BoardController {
             <div class='hp'>100</div>
             <div class='strength'>50</div>
             <div class='weapon-name'>Axe</div>
-            <div class='progress-wrapper'>
-                <label>HP:</label>
-                <div class='rpgui-progress red'></div>
-            </div>
-            <div class='progress-wrapper'>
-                 <label>Strength:</label>
-                 <div class='rpgui-progress green'></div>
-             </div>`;
+        `;
+
+        const progressHp = generateProgressBar("HP", "red", 1);
+        const progressStrength = generateProgressBar("Strength", "green", 1);
+
+        characterCard.appendChild(progressHp);
+        characterCard.appendChild(progressStrength);
 
         teamAWrapper.appendChild(characterCard);
         console.log(teamAWrapper);
 
         teamBWrapper.appendChild(characterCard);
-
-
-
-
-
-        // <div class='character-card rpgui-container framed-golden'>
-        //     <div class='name'>Hero</div>
-        //     <div class='hp'>100</div>
-        //     <div class='strength'>50</div>
-        //     <div class='weapon-name'>Axe</div>
-        //     <div class='progress-wrapper'>
-        //         <label>HP:</label>
-        //         <div class='rpgui-progress red'></div>
-        // //     </div>
-        //
-        //     <div class='progress-wrapper'>
-        //         <label>Strength:</label>
-        //         <div class='rpgui-progress green'></div>
-        //     </div>
-        // </div>
-
-
     };
+}
+
+function generateProgressBar(labelName, color, value){
+    const progressBar = document.createElement('div');
+    progressBar.classList.add('progress-wrapper');
+    const label = document.createElement('label');
+    label.innerText = labelName;
+    const progressInner = document.createElement('div');
+    progressInner.classList.add('rpgui-progress', color );
+
+    progressBar.appendChild(label);
+    progressBar.appendChild(progressInner);
+
+    RPGUI.create(progressInner, 'progress');
+    RPGUI.set_value(progressInner, value);
+    return progressBar;
 }

@@ -12,16 +12,3 @@ function mainGame() {
 
 mainGame();
 
-const wrapper = document.querySelector(".game-wrapper");
-
-const header = document.createElement("h1");
-
-const headerText = "Header Teaxt 1";
-const textExample = "Lorem ipsum";
-
-header.innerHTML = `<div>
-        <h1>${headerText}</h1>
-        <p>${textExample}</p>
-    </div>`;
-
-wrapper.appendChild(header);
