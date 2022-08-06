@@ -1,6 +1,18 @@
 import { between, getClassName } from './utilis.js';
 
-export const characterTypes = ["vampire", "human"]
+export const characterTypes = [
+    "Human",
+    "Alien",
+    "Humanoid",
+    "unknown",
+    "Poopybutthole",
+    "Mythological Creature",
+    "Animal",
+    "Robot",
+    "Cronenberg",
+    "Disease",
+    "Vampire"
+];
 
 class Person {
     constructor(name = "", type) {
@@ -49,13 +61,13 @@ class Person {
         const value = between(0, 100);
         let specialAttackPoints = 0;
 
-        if (this.type === "vampire" && value > 75) {
+        if (this.type.toLowerCase() === "vampire" && value > 75) {
             specialAttackPoints = Math.ceil(power * 0.15);
             this.hitPoints += specialAttackPoints;
             console.log(`Vampire Attack done! (recovered: ${specialAttackPoints} hp).`);
         }
 
-        if (this.type === "human" && value > 90) {
+        if (this.type.toLowerCase() === "human" && value > 90) {
             result = Math.floor(power * 1.5);
             console.log(`Human attack done! (extra hit: ${result}) hp`);
         }
@@ -91,7 +103,7 @@ export function createCharacter(characterClass, gameLevel) {
     // }
 
 
-    const character = new characterClass(characterTypes[between(0, 1)]);
+    const character = new characterClass(characterTypes[between(0, characterTypes.length - 1)]);
     const className = getClassName(character);
 
     const minHp = gameLevel[className].characterHitPoints.min;
