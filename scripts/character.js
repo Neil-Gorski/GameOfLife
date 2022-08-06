@@ -86,22 +86,18 @@ class Person {
 export class Hero extends Person {
     constructor(name, type) {
         super(name, type);
+        this.team = "Hero";
     }
 }
 
 export class Villain extends Person {
     constructor(name, type) {
         super(name, type);
+        this.team = "Villain";
     }
 }
 
 export async function createCharacter(characterClass, gameLevel) {
-    //download character data
-    //
-    // const characterDataResponse = await fetch("...");
-    // if (characterDataResponse.status === 200) {
-    //     characterDataResponse.data
-    // }
 
     const characterId = between(1, 826);
     const response = await fetch(`https://rickandmortyapi.com/api/character/${characterId}`);
@@ -129,7 +125,26 @@ export async function createCharacter(characterClass, gameLevel) {
     return character;
 }
 
+export function createTeamFromLocalStorage(team) {
+    const teamTemp = []
+    for(const character of team) {
+        teamTemp.push(createCharacterFromLocalStorage(character));
+    }
+    return teamTemp;
+}
+
+function createCharacterFromLocalStorage(characterData) {
+    const characterClass = characterData.team === "Hero" ? Hero : Villain;
+    const character = new characterClass(characterData.name, characterData.type);
+    character.setImageUrl(characterData.imageUrl);
+    character.setHitPoints(characterData.hitPoints);
+    character.setPowerAttack(characterData.powerAttack.min, characterData.powerAttack.max);
+
+    return character;
+}
+
 export function getRandomCharacter(team) {
     const currentCharacterIndex = between(0, team.length - 1);
     return team[currentCharacterIndex];
 }
+

@@ -1,4 +1,5 @@
 import { Hero, Villain } from './character.js';
+import {TEAM_A, TEAM_B} from "./main.js";
 
 export class BoardController {
     constructor(gameContainer, gameController, gameConfig) {
@@ -36,6 +37,11 @@ export class BoardController {
             this.gameController.villainsTeam = await this.gameController.createTeam(Villain, teamVillainCountInput);
 
             this.renderTeams();
+
+            localStorage.setItem(TEAM_A, JSON.stringify(this.gameController.heroesTeam));
+            localStorage.setItem(TEAM_B, JSON.stringify(this.gameController.villainsTeam));
+
+
         });
 
         this.gameLevelInput.addEventListener('change', () => {
