@@ -17,7 +17,7 @@ export class GameController {
         return team;
     }
 
-    battle() {
+    battle(rerenderTeamsCallback) {
         while (this.isTeamAlive(this.heroesTeam) && this.isTeamAlive(this.villainsTeam)) {
             const currentHero = getRandomCharacter(this.heroesTeam);
             const currentVillain = getRandomCharacter(this.villainsTeam);
@@ -34,6 +34,10 @@ export class GameController {
             }
             if (currentVillain.isAlive() === false) {
                 this.villainsTeam = this.villainsTeam.filter(villain => villain.id !== currentVillain.id);
+            }
+
+            if (rerenderTeamsCallback !== undefined) {
+                rerenderTeamsCallback();
             }
         }
     }

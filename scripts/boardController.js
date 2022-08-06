@@ -22,7 +22,7 @@ export class BoardController {
 
     addEventsListeners = () => {
         this.startButton.addEventListener('click', () => {
-            this.gameController.battle();
+            this.gameController.battle(this.renderTeams);
         });
 
         this.createTeamsButton.addEventListener('click', () => {
@@ -36,9 +36,6 @@ export class BoardController {
             this.gameController.villainsTeam = this.gameController.createTeam(Villain, teamVillainCountInput);
 
             this.renderTeams();
-
-            console.log(this.gameController.heroesTeam);
-            console.log(this.gameController.villainsTeam);
         });
 
         this.gameLevelInput.addEventListener('change', () => {
@@ -60,25 +57,24 @@ export class BoardController {
         for (const character of team) {
             const characterCard = document.createElement("div");
             characterCard.classList.add('character-card', 'rpgui-container', 'framed-golden');
-            // console.log(characterCard);
 
             characterCard.innerHTML = `
-                    <div class='name'>${character.name}</div>
-                    <div class='hp'>${character.hitPoints}</div>
-                    <div class='strength'>${character.strength}</div>
-                    <div class='weapon-name'>${character.type}</div>
+                    <div class='name'>Name: ${character.name}</div>
+                    <div class='hp'>HP: ${character.hitPoints}</div>
+                    <div class='strength'>Power: ${character.strength}</div>
+                    <div class='weapon-name'>Type: ${character.type}</div>
                 `;
 
             const progressHp = generateProgressBar("HP", "red", character.getCurrentPercentHitPoints());
-            const progressStrength = generateProgressBar("Strength", "green", 1);
+            // const progressStrength = generateProgressBar("Strength", "green", 1);
 
             characterCard.appendChild(progressHp);
-            characterCard.appendChild(progressStrength);
+            // characterCard.appendChild(progressStrength);
 
             wrapper.appendChild(characterCard);
         }
     }
-};
+}
 
 
 

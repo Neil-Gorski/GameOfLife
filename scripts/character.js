@@ -83,6 +83,14 @@ export class Villain extends Person {
 }
 
 export function createCharacter(characterClass, gameLevel) {
+    //download character data
+    //
+    // const characterDataResponse = await fetch("...");
+    // if (characterDataResponse.status === 200) {
+    //     characterDataResponse.data
+    // }
+
+
     const character = new characterClass(characterTypes[between(0, 1)]);
     const className = getClassName(character);
 
