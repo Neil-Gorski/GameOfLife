@@ -10,7 +10,8 @@
 </head>
 <body>
 <div class='rpgui-content'>
-    <div class='game-wrapper'>
+    <div class='game-wrapper rpgui-container framed-grey'>
+        <h1 class="teams-sizes-title">Game board:</h1>
 
         <div class='game-board rpgui-container framed'>
             <div class='teamA-wrapper team-wrapper' id='teamA-wrapper'>
@@ -22,25 +23,36 @@
         </div>
 
 
-        <div class='game-controller'>
+        <div class='game-controller rpgui-container framed'>
+            <h1 class="teams-sizes-title">Game controller:</h1>
             <!--            <input type='text' value='Test input' id="input-name">-->
             <!--            <input type='text' value='Test input' id="input-hitPoints">-->
             <!--            <input type='text' value='Test input' id="input-strength">-->
             <!--            <input type='text' value='Test input' id="input-weaponName">-->
+            <div class='class="rpgui-container framed-grey'>
+                    <h2 class="teams-sizes-title">Game level:</h2>
+                    <select class='rpgui-dropdown'>
+                        <option value='easy'>Easy</option>
+                        <option value='medium'>Medium</option>
+                        <option value='hard'>Hard</option>
+                    </select>
+            </div>
             <div class="teams-sizes">
-                <div class="teams-sizes-title">Number of players:</div> 
-                    <div class="team-container">
-                        <span>Heroes</span><input type='number' id='input-hero-count'>
-                    </div>
-                    <div class="team-container">
-                        <span>Villains</span><input type='number' id='input-villain-count'>
-                    </div>
+                <h2 class="teams-sizes-title">Number of players:</h2>
+                <div class="team-container">
+                    <span>Heroes</span><input type='number' id='input-hero-count'>
+                </div>
+                <div class="team-container">
+                    <span>Villains</span><input type='number' id='input-villain-count'>
                 </div>
             </div>
 
+
+        <button class='rpgui-button' id='button-generate-teams' type='button'><p>Generate random teams</p></button>
+        <button class='rpgui-button golden' id='button-start-game' type='button'><p>Start game</p></button>
+
             <!--            <button class="rpgui-button" id='button-random' type="button"><p>Random character</p></button>-->
-            <button class='rpgui-button' id='button-generate-teams' type='button'><p>Generate random teams</p></button>
-            <button class='rpgui-button golden' id='button-start-game' type='button'><p>Start game</p></button>
+
 
             <!--            <select class='rpgui-dropdown' id="select-team">-->
             <!--                <option value='teamA'>Team A</option>-->
