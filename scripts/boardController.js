@@ -9,6 +9,7 @@ export class BoardController {
         this.createTeamsButton = this.gameContainer.querySelector('#button-generate-teams');
         this.teamHeroCountInput = this.gameContainer.querySelector('#input-hero-count');
         this.teamVillainCountInput = this.gameContainer.querySelector('#input-villain-count');
+        this.gameLevelInput = this.gameContainer.querySelector('#game-level-select');
 
         this.fillBoardFromConfig();
         this.addEventsListeners();
@@ -38,6 +39,11 @@ export class BoardController {
 
             console.log(this.gameController.heroesTeam);
             console.log(this.gameController.villainsTeam);
+        });
+
+        this.gameLevelInput.addEventListener('change', () => {
+            this.gameConfig.setGameLevel(this.gameLevelInput.value);
+            this.fillBoardFromConfig();
         });
     };
 
