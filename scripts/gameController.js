@@ -1,5 +1,5 @@
 import { Hero, Villain, createCharacter, getRandomCharacter } from './character.js';
-import { between, getClassName } from './utilis.js';
+import { between, getClassName, timeout } from './utilis.js';
 
 export class GameController {
     constructor(gameConfig) {
@@ -17,7 +17,7 @@ export class GameController {
         return team;
     }
 
-    battle(rerenderTeamsCallback) {
+    async battle(rerenderTeamsCallback) {
         while (this.isTeamAlive(this.heroesTeam) && this.isTeamAlive(this.villainsTeam)) {
             const currentHero = getRandomCharacter(this.heroesTeam);
             const currentVillain = getRandomCharacter(this.villainsTeam);
@@ -39,6 +39,8 @@ export class GameController {
             if (rerenderTeamsCallback !== undefined) {
                 rerenderTeamsCallback();
             }
+
+            await timeout(50);
         }
     }
 

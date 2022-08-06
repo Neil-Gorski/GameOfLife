@@ -11,23 +11,3 @@ function mainGame() {
 }
 
 mainGame();
-
-
-
-
-//
-// const firstPromise = new Promise((resolve, reject) => {
-//     setTimeout(() => {
-//         resolve("Promise rozwiązany!!!");
-//     }, 2000)
-// });
-//
-// firstPromise.then((obrazek) => {
-//         console.log(obrazek);
-//         //<img> src = obrazek;
-//
-// }).catch().finally();
-//
-//
-//
-// await fetch("www.onet.pl");
