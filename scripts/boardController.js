@@ -25,15 +25,15 @@ export class BoardController {
             this.gameController.battle(this.renderTeams);
         });
 
-        this.createTeamsButton.addEventListener('click', () => {
+        this.createTeamsButton.addEventListener('click', async () => {
             const teamHeroCountInput = this.teamHeroCountInput.value > 20 ? this.gameConfig.gameLevel.hero.teamMembersCount : this.teamHeroCountInput.value;
             const teamVillainCountInput = this.teamVillainCountInput.value > 20 ? this.gameConfig.gameLevel.villain.teamMembersCount : this.teamVillainCountInput.value;
 
             this.teamHeroCountInput.value = teamHeroCountInput;
             this.teamVillainCountInput.value = teamVillainCountInput;
 
-            this.gameController.heroesTeam = this.gameController.createTeam(Hero, teamHeroCountInput);
-            this.gameController.villainsTeam = this.gameController.createTeam(Villain, teamVillainCountInput);
+            this.gameController.heroesTeam = await this.gameController.createTeam(Hero, teamHeroCountInput);
+            this.gameController.villainsTeam = await this.gameController.createTeam(Villain, teamVillainCountInput);
 
             this.renderTeams();
         });
@@ -59,10 +59,18 @@ export class BoardController {
             characterCard.classList.add('character-card', 'rpgui-container', 'framed-golden');
 
             characterCard.innerHTML = `
-                    <div class='name'>Name: ${character.name}</div>
-                    <div class='hp'>HP: ${character.hitPoints}</div>
-                    <div class='strength'>Power: ${character.strength}</div>
-                    <div class='weapon-name'>Type: ${character.type}</div>
+                <div class="character-card-details">    
+                    <div>
+                        <div class='character-detail name '>Name: ${character.name}</div>
+                        <div class='character-detail hp'>HP: ${character.hitPoints}</div>
+                        <div class='character-detail strength'>Power: ${character.strength}</div>
+                        <div class='character-detail weapon-name'>Type: ${character.type}</div>
+                    </div>
+                    <div class='character-card-image'>
+                        <img src="${character.imageUrl}" alt="character image">
+                    </div>
+                </div>    
+                    
                 `;
 
             const progressHp = generateProgressBar("HP", "red", character.getCurrentPercentHitPoints());

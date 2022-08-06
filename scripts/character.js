@@ -1,18 +1,17 @@
 import { between, getClassName } from './utilis.js';
 
-export const characterTypes = [
-    "Human",
-    "Alien",
-    "Humanoid",
-    "unknown",
-    "Poopybutthole",
-    "Mythological Creature",
-    "Animal",
-    "Robot",
-    "Cronenberg",
-    "Disease",
-    "Vampire"
-];
+// export const characterTypes = [
+//     "Human",
+//     "Alien",
+//     "Humanoid",
+//     "unknown",
+//     "Poopybutthole",
+//     "Mythological Creature",
+//     "Animal",
+//     "Robot",
+//     "Cronenberg",
+//     "Disease",
+// ];
 
 class Person {
     constructor(name = "", type) {
@@ -25,6 +24,10 @@ class Person {
 
     isAlive() {
         return this.hitPoints > 0;
+    }
+
+    setImageUrl(url) {
+        this.imageUrl = url;
     }
 
     setHitPoints(hp) {
@@ -61,10 +64,10 @@ class Person {
         const value = between(0, 100);
         let specialAttackPoints = 0;
 
-        if (this.type.toLowerCase() === "vampire" && value > 75) {
+        if (this.type.toLowerCase() === "alien" && value > 75) {
             specialAttackPoints = Math.ceil(power * 0.15);
             this.hitPoints += specialAttackPoints;
-            console.log(`Vampire Attack done! (recovered: ${specialAttackPoints} hp).`);
+            console.log(`Alien Attack done! (recovered: ${specialAttackPoints} hp).`);
         }
 
         if (this.type.toLowerCase() === "human" && value > 90) {
@@ -81,20 +84,18 @@ class Person {
 }
 
 export class Hero extends Person {
-    constructor(type) {
-        const characterName = "Hero";
-        super(characterName, type);
+    constructor(name, type) {
+        super(name, type);
     }
 }
 
 export class Villain extends Person {
-    constructor(type) {
-        const characterName = "Villain";
-        super(characterName, type);
+    constructor(name, type) {
+        super(name, type);
     }
 }
 
-export function createCharacter(characterClass, gameLevel) {
+export async function createCharacter(characterClass, gameLevel) {
     //download character data
     //
     // const characterDataResponse = await fetch("...");
@@ -102,8 +103,18 @@ export function createCharacter(characterClass, gameLevel) {
     //     characterDataResponse.data
     // }
 
+    const characterId = between(1, 826);
+    const response = await fetch(`https://rickandmortyapi.com/api/character/${characterId}`);
 
-    const character = new characterClass(characterTypes[between(0, characterTypes.length - 1)]);
+    if (response.status !== 200) {
+        console.error('Fetch character error!')
+        return;
+    }
+
+    const body = await response.json();
+
+    const character = new characterClass(body.name, body.species);
+    character.setImageUrl(body.image);
     const className = getClassName(character);
 
     const minHp = gameLevel[className].characterHitPoints.min;

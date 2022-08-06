@@ -8,11 +8,12 @@ export class GameController {
         this.gameConfig = gameConfig;
     }
 
-    createTeam(characterClass, membersCount) {
+    async createTeam(characterClass, membersCount) {
         const team = [];
 
         for (let i = 0; i < membersCount; i++) {
-            team.push(createCharacter(characterClass, this.gameConfig.gameLevel));
+            const character = await createCharacter(characterClass, this.gameConfig.gameLevel);
+            team.push(character);
         }
         return team;
     }

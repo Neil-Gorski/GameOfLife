@@ -57,6 +57,25 @@
     padding: 20px 10px 20px 10px;
 }
 
+.character-card-details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.character-detail {
+    padding: 5px 0;
+}
+
+.character-card-image {
+    width: 150px;
+}
+
+.character-card-image img {
+    width: 100%;
+    height: auto;
+}
+
 .character-card.rpgui-container:last-child {
     margin: 0;
 }
