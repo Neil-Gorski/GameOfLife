@@ -1,6 +1,5 @@
 import { between } from "./utilis.js";
 
-
 export class Matchfield{
     constructor(fieldSizeX, fieldSizeY){
         this.fieldSizeX = fieldSizeX;
@@ -19,6 +18,7 @@ export class Matchfield{
         }
         // this.field[0][0] = true;
         console.log(this.field);
+        this.renderField()
     }
 
     createEmptyField(){
@@ -85,5 +85,20 @@ export class Matchfield{
         res += this.checkFieldDown(y,x);
         res += this.checkFieldLeftDown(y,x);
         return res;
+    }
+
+    renderField(field){
+        const mainWindow =  document.querySelector(".main-window");
+        mainWindow.innerHTML = "";
+        for(let y=0 ; y<this.fieldSizeY ; y++){
+            const line = document.createElement("div");
+            line.classList.add(`field-line`);
+            for(let x = 0 ; x<this.fieldSizeX; x++){
+                const square = document.createElement("div");
+                square.classList.add("field-square", `${y}-${x}`)
+                line.appendChild(square);
+            }
+            mainWindow.appendChild(line)
+        }
     }
 }
