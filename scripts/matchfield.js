@@ -1,32 +1,37 @@
-import { between,sleep } from "./utilis.js";
+import { between, timer, clone } from "./utilis.js";
+import{ cyclesInput } from "./main.js"
+
 
 export class Matchfield{
     constructor(fieldSizeY, fieldSizeX){
         this.fieldSizeY = fieldSizeY;
         this.fieldSizeX = fieldSizeX;
-        this.field = [];
-        this.fieldEmpty = [];
-        this.fieldTmp = [];
+        this.field = this.createEmptyField();
+        this.fieldEmpty = this.createEmptyField();
+        this.currentLifeCycle = 0;
+        this.limitForLifeCycle =  cyclesInput.value;
+        this.stopLifeCycle = false;
+        this.finishCycles = false;
+        this.currentlyRuning = false;
+        this.renderField()
     }
 
-    createRandomFieldSpreed(randomSpreed) {
-        this.field = []
+    
+    createRandomFieldSpreed(randomSpreed = 1) {
         const random = Math.floor(15 / randomSpreed) 
+        let tempField = clone(this.fieldEmpty)
+
         for(let y = 0; y < this.fieldSizeY ; y++ ){
-            this.field.push([]);
             for(let x = 0; x < this.fieldSizeX; x++ ){
-                // this.field[y].push(false);
-                between(0,random) === 1 ? this.field[y].push(true): this.field[y].push(false);
+                between(0,random) === 1 ? tempField[y][x] = true: tempField[y][x] = false;
             }
         }
-        this.createEmptyField()
-        // this.field[0][0] = true;
-        // console.log(this.field);
-        this.renderField();
+        this.field = clone(tempField);
         
+        this.renderField();
     }
 
-    createEmptyField(start=false){
+    createEmptyField(){
         let tempField = [];
         for(let y = 0; y < this.fieldSizeY ; y++ ){
             tempField.push([]);
@@ -34,44 +39,9 @@ export class Matchfield{
                 tempField[y].push(false);
             }
         }
-
-        this.fieldTmp = tempField;
-        if(start === true){
-            this.field = tempField;
-            this.fieldEmpty = tempField;
-        }
-
-         this.renderField()
+        return tempField
     }
 
-    fieldLifeCycle(){
-        let tmpField = [...this.fieldEmpty]
-        for(let y = 0; y < this.fieldSizeY ; y++ ){
-            for(let x = 0; x < this.fieldSizeX; x++ ){
-                const neighbours = this.countFieldsAround(y,x);
-
-                if(neighbours === 0 || neighbours === 1){
-                    tmpField[y][x] = false;
-                }else if(neighbours >= 4){
-                    tmpField[y][x] = false;
-                }else if(this.field[y][x] === true && neighbours === 2){
-                    tmpField[y][x] = true;
-                }else if(this.field[y][x] === false && neighbours === 2){
-                    tmpField[y][x] = false;
-                }else if(this.field[y][x] === false && neighbours === 3){
-                    tmpField[y][x] = true;
-                }else if(this.field[y][x] === true && neighbours === 3){
-                    tmpField[y][x] = true;
-                }
-
-            }
-        }
-        this.field = tmpField;
-        // console.log(this.field)
-        this.renderField()
-        
-
-    }
     checkFieldLeft(y,x){
         return this.field[y][x-1 < 0 ? x + this.fieldSizeX - 1: x-1] == true ? 1 : 0;
     }
@@ -96,7 +66,7 @@ export class Matchfield{
     checkFieldRightDown(y,x){
         return this.field[y+1 > this.fieldSizeY - 1 ? y - this.fieldSizeY + 1: y+1][x+1 > this.fieldSizeX - 1 ? x - this.fieldSizeX + 1: x+1] === true ? 1 : 0;
     }
-    countFieldsAround(y,x){
+    countLivingFieldsAround(y,x){
         let res = 0;
         res += this.checkFieldLeft(y,x);
         res += this.checkFieldLeftUp(y,x);
@@ -108,6 +78,33 @@ export class Matchfield{
         res += this.checkFieldLeftDown(y,x);
         return res;
     }
+
+    oneLifeCycleStep(){
+        let tempField = clone(this.fieldEmpty);
+
+        for(let y = 0; y < this.fieldSizeY ; y++ ){
+            for(let x = 0; x < this.fieldSizeX; x++ ){
+                const neighbours = this.countLivingFieldsAround(y,x);
+
+                if(neighbours === 0 || neighbours === 1){
+                    tempField[y][x] = false;
+                }else if(neighbours >= 4){
+                    tempField[y][x] = false;
+                }else if(this.field[y][x] === true && neighbours === 2){
+                    tempField[y][x] = true;
+                }else if(this.field[y][x] === false && neighbours === 2){
+                    tempField[y][x] = false;
+                }else if(this.field[y][x] === false && neighbours === 3){
+                    tempField[y][x] = true;
+                }else if(this.field[y][x] === true && neighbours === 3){
+                    tempField[y][x] = true;
+                }
+
+            }
+        }
+        this.field = clone(tempField);
+    }
+
     renderField(){
         const mainWindow =  document.querySelector(".main-window");
         mainWindow.innerHTML = "";
@@ -126,6 +123,35 @@ export class Matchfield{
             }
             mainWindow.appendChild(line)
         }
+    }
+    
+    async lifeCycleLoop(){
+        const currentCycleField = document.querySelector(".current-cycle");
+
+        this.currentlyRuning = true;
+        while (!this.stopLifeCycle && this.currentLifeCycle <= this.limitForLifeCycle && this.currentlyRuning){
+            this.currentlyRuning = true;
+            this.oneLifeCycleStep();
+            this.renderField();
+            currentCycleField.textContent = `Cycles = ${this.currentLifeCycle} / ${this.limitForLifeCycle}`
+            this.currentLifeCycle ++;
+            await timer(200);
+        }
+        this.currentlyRuning = false;
+    }
+
+    clearField(){
+        this.field = clone(this.fieldEmpty)
+        this.renderField()
+    }
+
+    toggleSquare(y,x){
+        const tempField = clone(this.field);
+        
+        tempField[y][x] === false ? tempField[y][x] = true : tempField[y][x] = false;
+        this.field = clone(tempField) 
+        this.renderField()
+        
     }
 }
 

@@ -10,21 +10,21 @@
 	<body>
 		<div class="option-wrapper">
 			<button class="button start-game">Start</button>
+			<button class="button stop-game">Stop</button>
 			<button class="button random-spreed">Random spreed</button>
 			<button class="button clear-field">Clear field</button>
 
-			<label for="cycles">Number of cycles (10-1000):</label>
+			<label for="cycles">Number of cycles:</label>
 			<input
 				class="cycles"
 				type="number"
 				id="cycles"
 				name="cycles"
-				min="10"
-				max="1000"
-				value="10"
+				min="1"
+				value="100"
 			/>
+			<div class="current-cycle">Cycles = 0</div>
 		</div>
-		<div class="current-cycle">Cycles = 0</div>
 		<div class="main-window"></div>
 		<script type="module" src="./scripts/main.js"></script>
 	</body>

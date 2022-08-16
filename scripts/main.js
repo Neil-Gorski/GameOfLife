@@ -1,47 +1,50 @@
 import { Matchfield } from "./matchfield.js";
-import { sleep, timer } from "./utilis.js";
+import { getCordinateFromString } from "./utilis.js";
 
 const startBtn = document.querySelector(".start-game");
+const stopBtn = document.querySelector(".stop-game");
 const clearBtn = document.querySelector(".clear-field")
 const randomBtn = document.querySelector(".random-spreed")
-const cyclesInput = document.querySelector(".cycles");
+export const cyclesInput = document.getElementById("cycles");
 const currentCycleField = document.querySelector(".current-cycle")
-
-
-
-async function loop(field, cycles) {
-    for (let i = 1; i < cycles +1; i++){
-        field.fieldLifeCycle();
-        currentCycleField.textContent = `Cycles = ${i}`
-        await timer(200);
-    }
-}
+const square = document.querySelector(".field-square")
 
 
 function main(){
-    const getCyclesFromHtml = () => cyclesInput.value;
     
     const field = new Matchfield(80,100);
-    field.createEmptyField(true);
     
+    const onClick = (event) => {
+        let cordinates = getCordinateFromString(event.target.className);
+        if(cordinates !== null){
+            field.toggleSquare(cordinates[0], cordinates[1])
+        }
+      }
+
     
     startBtn.addEventListener("click",function (){
-        const cyclesHtml = getCyclesFromHtml()
-        loop(field, cyclesHtml)        
+        field.stopLifeCycle = false;
+        field.limitForLifeCycle = cyclesInput.value;
+        field.lifeCycleLoop()   
     });
-
+    
+    stopBtn.addEventListener("click", () => field.stopLifeCycle = true);
+    
     randomBtn.addEventListener("click",function (){
-        field.createRandomFieldSpreed(1);
+        field.createRandomFieldSpreed();
+        field.currentLifeCycle = 0;
+        
     })
-
-    cyclesInput.addEventListener("change", changeCycles)
-
+    
     clearBtn.addEventListener("click", function (){
-        field.createEmptyField(true);
-        currentCycleField.textContent = `Cycles = 0`
+        field.clearField()
+        field.stopLifeCycle = true;
+        field.currentLifeCycle = 0;
+        currentCycleField.textContent = `Cycles = ${field.currentLifeCycle}`
     });
-};
 
+    window.addEventListener('click', onClick);
+};
 
 main()
 
