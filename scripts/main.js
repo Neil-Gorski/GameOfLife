@@ -4,10 +4,14 @@ import { getCordinateFromString } from "./utilis.js";
 const startBtn = document.querySelector(".start-game");
 const stopBtn = document.querySelector(".stop-game");
 const clearBtn = document.querySelector(".clear-field")
-const randomBtn = document.querySelector(".random-spreed")
+const randomBtn = document.querySelector(".random-spreed");
 export const cyclesInput = document.getElementById("cycles");
-const currentCycleField = document.querySelector(".current-cycle")
-const square = document.querySelector(".field-square")
+export const currentCycleField = document.querySelector(".current-cycle");
+const square = document.querySelector(".field-square");
+const xAxisSlider = document.getElementById("x-axis");
+const yAxisSlider = document.getElementById("y-axis");
+
+
 
 
 function main(){
@@ -44,6 +48,16 @@ function main(){
     });
 
     window.addEventListener('click', onClick);
+
+    xAxisSlider.addEventListener("change", function(){
+        field.fieldSizeX = parseInt(xAxisSlider.value)
+        field.resizeField()
+    })
+    yAxisSlider.addEventListener("change", function(){
+        field.fieldSizeY = parseInt(yAxisSlider.value)
+        field.resizeField()
+    })
+
 };
 
 main()

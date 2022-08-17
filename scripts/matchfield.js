@@ -1,5 +1,5 @@
 import { between, timer, clone } from "./utilis.js";
-import{ cyclesInput } from "./main.js"
+import{ cyclesInput, currentCycleField} from "./main.js"
 
 
 export class Matchfield{
@@ -17,7 +17,7 @@ export class Matchfield{
     }
 
     
-    createRandomFieldSpreed(randomSpreed = 1) {
+    createRandomFieldSpreed(randomSpreed = 3) {
         const random = Math.floor(15 / randomSpreed) 
         let tempField = clone(this.fieldEmpty)
 
@@ -126,7 +126,6 @@ export class Matchfield{
     }
     
     async lifeCycleLoop(){
-        const currentCycleField = document.querySelector(".current-cycle");
 
         this.currentlyRuning = true;
         while (!this.stopLifeCycle && this.currentLifeCycle <= this.limitForLifeCycle && this.currentlyRuning){
@@ -152,6 +151,16 @@ export class Matchfield{
         this.field = clone(tempField) 
         this.renderField()
         
+    }
+    
+    resizeField(){
+        this.stopLifeCycle = true;
+        this.clearField()
+        this.currentLifeCycle = 0;
+        this.field = this.createEmptyField();
+        this.fieldEmpty = this.createEmptyField();
+        this.renderField()
+        currentCycleField.textContent = `Cycles = ${this.currentLifeCycle}`
     }
 }
 

@@ -8,22 +8,50 @@
 		<link rel="stylesheet" href="style/style.css" />
 	</head>
 	<body>
-		<div class="option-wrapper">
-			<button class="button start-game">Start</button>
-			<button class="button stop-game">Stop</button>
-			<button class="button random-spreed">Random spreed</button>
-			<button class="button clear-field">Clear field</button>
+		<div>
+			<div class="option-wrapper">
+				<button class="button start-game">Start</button>
+				<button class="button stop-game">Stop</button>
+				<button class="button random-spreed">Random spreed</button>
+				<button class="button clear-field">Clear field</button>
 
-			<label for="cycles">Number of cycles:</label>
-			<input
-				class="cycles"
-				type="number"
-				id="cycles"
-				name="cycles"
-				min="1"
-				value="100"
-			/>
-			<div class="current-cycle">Cycles = 0</div>
+				<label for="cycles">Number of cycles:</label>
+				<input
+					class="cycles"
+					type="number"
+					id="cycles"
+					name="cycles"
+					min="1"
+					value="100"
+				/>
+				<div class="current-cycle">Cycles = 0</div>
+
+				<div>
+					<label for="y-axis">Y: </label>
+					<input
+						type="range"
+						id="y-axis"
+						name="y-axis"
+						min="10"
+						max="80"
+						value="60"
+						step="10"
+					/>
+				</div>
+
+				<div>
+					<label for="x-axis">X: </label>
+					<input
+						type="range"
+						id="x-axis"
+						name="x-axis"
+						min="10"
+						max="180"
+						value="100"
+						step="10"
+					/>
+				</div>
+			</div>
 		</div>
 		<div class="main-window"></div>
 		<script type="module" src="./scripts/main.js"></script>
