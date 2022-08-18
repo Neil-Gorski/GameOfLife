@@ -114,7 +114,6 @@ export class Matchfield{
             for(let x = 0 ; x < this.fieldSizeX; x++){
                 const square = document.createElement("div");
                 square.classList.add("field-square", `${y}-${x}`);
-                console.log(y,x)
                 if(this.field[y][x] === true){
                     square.classList.add("alive")
                 }else{
