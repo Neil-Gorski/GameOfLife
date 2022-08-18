@@ -1,7 +1,20 @@
+body {
+	background-image: url("../img/bg_desert.jpg");
+	height: 90vh;
+}
+
+.top-section {
+	display: flex;
+	justify-content: center;
+}
+.field-section {
+	display: flex;
+	justify-content: center;
+}
 .main-window {
 	border: solid 2px black;
 	display: inline-block;
-	background-color: rgb(204, 243, 167);
+	background-color: rgb(203, 120, 88);
 }
 /* Start Button */
 .start-game {
@@ -104,12 +117,25 @@
 	position: relative;
 	top: 1px;
 }
+
 .option-wrapper {
-	margin: 16px;
+	margin-bottom: 10px;
+	border: solid 2px black;
 	border-radius: 15px;
 	padding: 20px;
 	display: inline-block;
-	background-color: gray;
+	background-color: hsl(17, 53%, 40%);
+	justify-content: center;
+}
+.button-wrapper {
+	display: flex;
+	justify-content: center;
+	margin-right: 5px;
+}
+.button {
+	margin: 0px 5px 5px 5px;
+}
+.input-wrapper {
 }
 label {
 	display: inline-block;
@@ -120,9 +146,10 @@ label {
 	padding: 6px 0px 6px 24px;
 	text-decoration: none;
 }
-input {
+input.cycles {
+	width: 60px;
+
 	display: inline-block;
-	width: auto;
 	color: #000;
 	font-family: Arial;
 	font-size: 15px;
@@ -135,7 +162,7 @@ input {
 
 .current-cycle {
 	display: inline-block;
-	width: auto;
+	width: 140px;
 	color: #000;
 	font-family: Arial;
 	font-size: 15px;
@@ -148,13 +175,13 @@ input {
 .field-square {
 	height: 8px;
 	width: 8px;
-	border: 1px solid black;
+	border: 1px solid rgb(209, 136, 104);
 	border-radius: 25%;
 }
 .field-square:hover {
-	background-color: gray;
+	background-color: red;
 }
 
 .field-square.alive {
-	background-color: black;
+	background-color: hwb(124 7% 70%);
 }

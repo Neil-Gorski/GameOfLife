@@ -16,7 +16,7 @@ const yAxisSlider = document.getElementById("y-axis");
 
 function main(){
     
-    const field = new Matchfield(80,100);
+    const field = new Matchfield(80,180);
     
     const onClick = (event) => {
         let cordinates = getCordinateFromString(event.target.className);

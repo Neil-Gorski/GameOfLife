@@ -108,12 +108,13 @@ export class Matchfield{
     renderField(){
         const mainWindow =  document.querySelector(".main-window");
         mainWindow.innerHTML = "";
-        for(let y=0 ; y<this.fieldSizeY ; y++){
+        for(let y=0 ; y < this.fieldSizeY ; y++){
             const line = document.createElement("div");
             line.classList.add(`field-line`);
             for(let x = 0 ; x < this.fieldSizeX; x++){
                 const square = document.createElement("div");
                 square.classList.add("field-square", `${y}-${x}`);
+                console.log(y,x)
                 if(this.field[y][x] === true){
                     square.classList.add("alive")
                 }else{
@@ -155,10 +156,10 @@ export class Matchfield{
     
     resizeField(){
         this.stopLifeCycle = true;
-        this.clearField()
         this.currentLifeCycle = 0;
-        this.field = this.createEmptyField();
         this.fieldEmpty = this.createEmptyField();
+        this.field = clone(this.fieldEmpty);
+        this.currentlyRuning = false;
         this.renderField()
         currentCycleField.textContent = `Cycles = ${this.currentLifeCycle}`
     }

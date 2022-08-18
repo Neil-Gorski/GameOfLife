@@ -8,25 +8,15 @@
 		<link rel="stylesheet" href="style/style.css" />
 	</head>
 	<body>
-		<div>
+		<section class="top-section">
 			<div class="option-wrapper">
-				<button class="button start-game">Start</button>
-				<button class="button stop-game">Stop</button>
-				<button class="button random-spreed">Random spreed</button>
-				<button class="button clear-field">Clear field</button>
-
-				<label for="cycles">Number of cycles:</label>
-				<input
-					class="cycles"
-					type="number"
-					id="cycles"
-					name="cycles"
-					min="1"
-					value="100"
-				/>
-				<div class="current-cycle">Cycles = 0</div>
-
-				<div>
+				<div class="button-wrapper">
+					<button class="button start-game">Start</button>
+					<button class="button stop-game">Stop</button>
+					<button class="button random-spreed">Random spreed</button>
+					<button class="button clear-field">Clear field</button>
+				</div>
+				<div class="input-wrapper">
 					<label for="y-axis">Y: </label>
 					<input
 						type="range"
@@ -34,12 +24,10 @@
 						name="y-axis"
 						min="10"
 						max="80"
-						value="60"
+						value="80"
 						step="10"
 					/>
-				</div>
 
-				<div>
 					<label for="x-axis">X: </label>
 					<input
 						type="range"
@@ -47,13 +35,25 @@
 						name="x-axis"
 						min="10"
 						max="180"
-						value="100"
+						value="180"
 						step="10"
 					/>
+					<label for="cycles">Number of cycles:</label>
+					<input
+						class="cycles"
+						type="number"
+						id="cycles"
+						name="cycles"
+						min="10"
+						value="200"
+					/>
+					<div class="current-cycle">Cycles = 0</div>
 				</div>
 			</div>
-		</div>
-		<div class="main-window"></div>
+		</section>
+		<section class="field-section">
+			<div class="main-window"></div>
+		</section>
 		<script type="module" src="./scripts/main.js"></script>
 	</body>
 </html>
