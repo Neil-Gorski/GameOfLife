@@ -1,5 +1,5 @@
 import { between, timer, clone } from "./utilis.js";
-import{ cyclesInput, currentCycleField} from "./main.js"
+import{ cyclesInput, currentCycleField} from "./main-old.js"
 
 
 export class Matchfield{
@@ -80,32 +80,43 @@ export class Matchfield{
     }
 
     oneLifeCycleStep(){
-        let tempField = clone(this.fieldEmpty);
+
+        let tempField = JSON.parse(JSON.stringify(this.fieldEmpty))
+
+        // let tempField = clone(this.fieldEmpty);
 
         for(let y = 0; y < this.fieldSizeY ; y++ ){
             for(let x = 0; x < this.fieldSizeX; x++ ){
                 const neighbours = this.countLivingFieldsAround(y,x);
+                const square = document.getElementById(`${y}-${x}`);
 
                 if(neighbours === 0 || neighbours === 1){
                     tempField[y][x] = false;
+                    square.classList.remove("alive")
                 }else if(neighbours >= 4){
                     tempField[y][x] = false;
+                    square.classList.remove("alive")
                 }else if(this.field[y][x] === true && neighbours === 2){
                     tempField[y][x] = true;
+                    square.classList.add("alive")
                 }else if(this.field[y][x] === false && neighbours === 2){
                     tempField[y][x] = false;
+                    square.classList.remove("alive")
                 }else if(this.field[y][x] === false && neighbours === 3){
                     tempField[y][x] = true;
+                    square.classList.add("alive")
                 }else if(this.field[y][x] === true && neighbours === 3){
                     tempField[y][x] = true;
+                    square.classList.add("alive")
                 }
 
             }
         }
-        this.field = clone(tempField);
+        // this.field = clone(tempField);
+        this.field = tempField;
     }
 
-    renderField(){
+    renderField(){ //TODO nur am anfang rendern und danach nur die klasse wechseln für performens
         const mainWindow =  document.querySelector(".main-window");
         mainWindow.innerHTML = "";
         for(let y=0 ; y < this.fieldSizeY ; y++){
@@ -113,7 +124,8 @@ export class Matchfield{
             line.classList.add(`field-line`);
             for(let x = 0 ; x < this.fieldSizeX; x++){
                 const square = document.createElement("div");
-                square.classList.add("field-square", `${y}-${x}`);
+                square.classList.add("field-square");
+                square.setAttribute("id", `${y}-${x}`);
                 if(this.field[y][x] === true){
                     square.classList.add("alive")
                 }else{
@@ -124,19 +136,37 @@ export class Matchfield{
             mainWindow.appendChild(line)
         }
     }
+
+    updateField(){
+        for(let y = 0 ; y < this.fieldSizeY ; y++){
+            for(let x = 0 ; x < this.fieldSizeX; x++){
+                console.time()
+                const square = document.getElementById(`${y}-${x}`)
+                console.timeEnd()
+                if(this.field[y][x] === true){
+                    square.classList.add("alive")
+                }else{
+                    square.classList.remove("alive")
+                }
+            }
+        }
+    }
     
     async lifeCycleLoop(){
 
         this.currentlyRuning = true;
+        // console.time()
         while (!this.stopLifeCycle && this.currentLifeCycle <= this.limitForLifeCycle && this.currentlyRuning){
             this.currentlyRuning = true;
             this.oneLifeCycleStep();
-            this.renderField();
+            // this.updateField()
+            // this.renderField();
             currentCycleField.textContent = `Cycles = ${this.currentLifeCycle} / ${this.limitForLifeCycle}`
             this.currentLifeCycle ++;
-            await timer(200);
+            await timer(10);
         }
         this.currentlyRuning = false;
+        // console.timeEnd()
     }
 
     clearField(){
@@ -149,7 +179,7 @@ export class Matchfield{
         
         tempField[y][x] === false ? tempField[y][x] = true : tempField[y][x] = false;
         this.field = clone(tempField) 
-        this.renderField()
+        this.updateField()
         
     }
     
