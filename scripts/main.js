@@ -1,41 +1,65 @@
-const obj = {
-    name: 'Andy',
-    move: function () {
-        return 'up';
-    }
-}
+import { Matchfield } from "./matchfield.js";
+import { getCordinateFromString } from "./utilis.js";
 
-obj.move()
-obj.name
-
-
-function Car(id, name, type, color) {
-    this.id = id;
-    this.name = name;
-    this.type = type;
-}
-
-Car.prototype.getName = function () {return this.name};
-
-var myFirstCar = new Car('1', 'opel', 'sedan', 'black');
-
-myFirstCar.getName();
+const startBtn = document.querySelector(".start-game");
+const stopBtn = document.querySelector(".stop-game");
+const clearBtn = document.querySelector(".clear-field")
+const randomBtn = document.querySelector(".random-spreed");
+export const cyclesInput = document.getElementById("cycles");
+export const currentCycleField = document.querySelector(".current-cycle");
+const square = document.querySelector(".field-square");
+const xAxisSlider = document.getElementById("x-axis");
+const yAxisSlider = document.getElementById("y-axis");
 
 
-class Car {
-    constructor(id, name, type, color) {
-        this.id = id;
-        this.name = name;
-        this.type = type;
-    }
 
-    getName() {
-        return this.name;
-    }
-}
 
-const mySecondCar = new Car('1', 'opel', 'sedan', 'black');
+function main(){
+    
+    const field = new Matchfield(80,180);
+    
+    const onClick = (event) => {
+        let cordinates = getCordinateFromString(event.target.className);
+        if(cordinates !== null){
+            field.toggleSquare(cordinates[0], cordinates[1])
+        }
+      }
 
-mySecondCar.name = 'bmw';
+    
+    startBtn.addEventListener("click",function (){
+        field.stopLifeCycle = false;
+        field.limitForLifeCycle = cyclesInput.value;
+        field.lifeCycleLoop()   
+    });
+    
+    stopBtn.addEventListener("click", () => field.stopLifeCycle = true);
+    
+    randomBtn.addEventListener("click",function (){
+        field.createRandomFieldSpreed();
+        field.currentLifeCycle = 0;
+        
+    })
+    
+    clearBtn.addEventListener("click", function (){
+        field.clearField()
+        field.stopLifeCycle = true;
+        field.currentLifeCycle = 0;
+        currentCycleField.textContent = `Cycles = ${field.currentLifeCycle}`
+    });
 
-mySecondCar.getName = 'cool';
+    window.addEventListener('click', onClick);
+
+    xAxisSlider.addEventListener("change", function(){
+        field.fieldSizeX = parseInt(xAxisSlider.value)
+        field.resizeField()
+    })
+    yAxisSlider.addEventListener("change", function(){
+        field.fieldSizeY = parseInt(yAxisSlider.value)
+        field.resizeField()
+    })
+
+};
+
+main()
+
+

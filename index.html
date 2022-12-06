@@ -1,14 +1,59 @@
-<!doctype html>
-<html lang='en'>
-<head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'>
-    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
-    <link rel="stylesheet" href="./style/style.css">
-    <title>Java script - project</title>
-</head>
-<body>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Game of Life</title>
+		<link rel="stylesheet" href="style/style.css" />
+	</head>
+	<body>
+		<section class="top-section">
+			<div class="option-wrapper">
+				<div class="button-wrapper">
+					<button class="button start-game">Start</button>
+					<button class="button stop-game">Stop</button>
+					<button class="button random-spreed">Random spreed</button>
+					<button class="button clear-field">Clear field</button>
+				</div>
+				<div class="input-wrapper">
+					<label for="y-axis">Y: </label>
+					<input
+						type="range"
+						id="y-axis"
+						name="y-axis"
+						min="10"
+						max="80"
+						value="80"
+						step="10"
+					/>
 
-<script src='./scripts/main.js'></script>
-</body>
+					<label for="x-axis">X: </label>
+					<input
+						type="range"
+						id="x-axis"
+						name="x-axis"
+						min="10"
+						max="180"
+						value="180"
+						step="10"
+					/>
+					<label for="cycles">Number of cycles:</label>
+					<input
+						class="cycles"
+						type="number"
+						id="cycles"
+						name="cycles"
+						min="10"
+						value="200"
+					/>
+					<div class="current-cycle">Cycles = 0</div>
+				</div>
+			</div>
+		</section>
+		<section class="field-section">
+			<div class="main-window"></div>
+		</section>
+		<script type="module" src="./scripts/main.js"></script>
+	</body>
 </html>
